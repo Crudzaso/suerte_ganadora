@@ -8,9 +8,9 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+
     <!-- Styles / Scripts -->
-    <link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+    @vite(['resources/css/style.bundle.css', 'resources/js/app.js'])
 </head>
 <body id="kt_body" class="app-blank bgi-size-cover bgi-position-center bgi-no-repeat">
     <script>
@@ -51,7 +51,7 @@
                     <div class="card-body py-15 py-lg-20">
                         <div class="mb-7">
                             <a href="index.html" class="">
-                                <img alt="Logo" src="assets/media/logo.jpeg" class="h-200px logo" />
+                                <img alt="Logo" src="{{ asset('media/logo.jpeg') }}" class="h-200px logo" />
                             </a>
                         </div>
                         <h1 class="fw-bolder text-gray-900 mb-5">Bienvenidos a suerte ganadora</h1>
