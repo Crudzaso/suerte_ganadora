@@ -45,16 +45,16 @@
                 object-fit: cover; 
             }
         </style>
-        <div class="d-flex flex-column flex-center flex-column-fluid">
+        <div id="card-welcome" class="d-flex flex-column flex-center flex-column-fluid">
             <div class="d-flex flex-column flex-center text-center p-10">
-                <div class="card card-flush w-md-650px py-5">
-                    <div class="card-body py-15 py-lg-20">
-                        <div class="mb-7">
+                <div id="kt_login_signin" class="card card-flush w-md-650px py-5">
+                    <div id="card-login" class="card-body py-15 py-lg-20">
+                        <div id="login-card" class="mb-7">
                             <a href="index.html" class="">
-                                <img alt="Logo" src="{{ asset('media/logo.jpeg') }}" class="h-200px logo" />
+                                <img alt="Logo" src="{{ asset('media/logo.jpeg') }}" class="h-150px logo" />
                             </a>
                         </div>
-                        <h1 class="fw-bolder text-gray-900 mb-5">Bienvenidos a suerte ganadora</h1>
+                        <h1 id="login-title" class="fw-bolder text-gray-900 mb-5">Bienvenidos a suerte ganadora</h1>
                         <div class="fw-semibold fs-6 text-gray-500 mb-7">texto de ejemplo</div>						
                         <div class="mb-0">
                             @livewire('login-button')
