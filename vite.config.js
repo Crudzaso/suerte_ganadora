@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
-import glob from 'glob';
+import * as glob from 'glob';
+
 
 const customJsFiles = glob.sync('resources/js/custom/*.js');
 
