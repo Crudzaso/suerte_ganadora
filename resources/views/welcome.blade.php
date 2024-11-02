@@ -42,6 +42,7 @@
             }
             .logo {
                 border-radius: 50%;
+                box-shadow: 0 6px 10px 12px rgba(0, 0, 0, 0.5)!important;
                 object-fit: cover; 
             }
         </style>
@@ -51,7 +52,7 @@
                     <div id="card-login" class="card-body py-15 py-lg-20">
                         <div id="login-card" class="mb-7">
                             <a href="index.html" class="">
-                                <img alt="Logo" src="{{ asset('media/logo.jpeg') }}" class="h-150px logo" />
+                                <img id="logo-welcome" alt="Logo" src="{{ asset('media/logo.jpeg') }}" class="h-150px logo" />
                             </a>
                         </div>
                         <h1 id="login-title" class="fw-bolder text-gray-900 mb-5">Bienvenidos a suerte ganadora</h1>
