@@ -44,5 +44,13 @@
                 </x-button>
             </div>
         </form>
+
+        <!-- Botón de inicio de sesión con Google -->
+        <div class="mt-6">
+            <a href="{{ route('login.google') }}" class="flex items-center justify-center bg-white border border-gray-300 rounded-md shadow-sm px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
+                 <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google Logo" class="h-5 mr-2" style="width: 24px; height: 24px;" />
+                <span>{{ __('Iniciar sesión con Google') }}</span>
+            </a>
+        </div>
     </x-authentication-card>
 </x-guest-layout>
