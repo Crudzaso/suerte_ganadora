@@ -62,10 +62,10 @@ class SendDiscordNotification
         
         $colors = [
             'creado' => '00ff00', 
-            'actualizado' => '0000ff', 
+            'actualizado' => 'ffcc00', 
             'eliminado' => 'ff0000', 
             'restaurado' => 'ffff00', 
-            'ingreso' => 'ffcc00', 
+            'ingreso' =>  '0000ff',
             'registrado' => '00ffff', 
         ];
     
