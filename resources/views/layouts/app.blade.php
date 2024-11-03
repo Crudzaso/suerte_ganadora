@@ -10,6 +10,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
     <link href="{{ asset('plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
+     @livewireStyles
 </head>
 <style>
     body {
@@ -24,11 +25,12 @@
     }
 </style>
 
-<body class="font-sans antialiased">
-    <div class="min-h-screen bg-gray-100">
+    <body class="font-sans antialiased">
         @include('layouts.header')
-        <div><br></div>
-        @yield('content')
-    </div>
+        <div class="min-h-screen bg-gray-100">
+            @yield('content')
+        </div>
+
+     @livewireScripts
 </body>
 </html>
