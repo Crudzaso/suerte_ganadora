@@ -227,12 +227,12 @@
 }
 
 .header {
-  position: sticky; /* o sticky, según lo que prefieras */
-  top: 0; /* Asegúrate de que esté en la parte superior */
+  position: sticky; 
+  top: 0; 
   left: 0;
   right: 0;
   background-color: #ffffff;
-   /* Asegúrate de que esté por encima de otros elementos */
+  z-index: 1000;
 }
 
 .menu-sub-dropdown{
@@ -243,6 +243,7 @@
   color: #212529;
   background-color: #fff!important;
   background-clip: padding-box;
+  z-index: 1000;
 }
  body {
   background-color: #ffffff83 !important;

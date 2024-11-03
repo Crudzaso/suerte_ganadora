@@ -23,9 +23,6 @@ Route::middleware([
 
 });
 
-
-// Ruta para redirigir a Google
 Route::get('login/google', [GoogleController::class, 'redirectToGoogle'])->name('login.google');
 
-// Ruta para manejar el callback de Google
 Route::get('callback', [GoogleController::class, 'handleGoogleCallback']);
