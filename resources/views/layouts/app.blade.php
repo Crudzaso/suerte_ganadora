@@ -10,7 +10,10 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
     <link href="{{ asset('plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
+     @livewireStyles
 </head>
+
+
 <body class="font-sans antialiased">
 
     @include('layouts.header')
@@ -20,5 +23,6 @@
     @yield('content')
 
     @livewireScripts
+
 </body>
 </html>
