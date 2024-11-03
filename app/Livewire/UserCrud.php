@@ -6,6 +6,11 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 use Livewire\WithPagination;
+use App\Events\UserCreated;
+use App\Events\UserUpdated;
+use App\Events\UserDeleted;
+use App\Events\UserRestore;
+
 
 class UserCrud extends Component
 {
@@ -33,11 +38,13 @@ class UserCrud extends Component
     {
         $this->validate();
 
-        User::create([
+        $user = User::create([
             'name' => $this->name,
             'email' => $this->email,
             'password' => Hash::make($this->password),
         ]);
+
+        event(new UserCreated($user)); // Disparar el evento
 
         session()->flash('message', 'Usuario creado exitosamente.');
         $this->resetInputFields();
@@ -58,23 +65,29 @@ class UserCrud extends Component
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $this->user_id,
         ]);
-
+    
         $user = User::findOrFail($this->user_id);
         $user->update([
             'name' => $this->name,
             'email' => $this->email,
             'password' => $this->password ? Hash::make($this->password) : $user->password,
         ]);
-
+    
+        event(new UserUpdated($user)); // Disparar el evento
+    
         session()->flash('message', 'Usuario actualizado exitosamente.');
         $this->resetInputFields();
     }
 
     public function delete($id)
-    {
-        User::findOrFail($id)->delete();
-        session()->flash('message', 'Usuario eliminado exitosamente.');
-    }
+{
+    $user = User::findOrFail($id); 
+    $user->delete(); 
+
+    event(new UserDeleted($user)); 
+
+    session()->flash('message', 'Usuario eliminado exitosamente.');
+}
 
     public function render()
     {
