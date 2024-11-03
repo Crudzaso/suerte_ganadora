@@ -43,5 +43,8 @@ return [
         : 'https://suerte-ganadora.crudzaso.com/callback',
     ],
 
+    'discord' => [
+        'webhook_url' => env('DISCORD_WEBHOOK_URL'),
+    ],
 
 ];
