@@ -106,7 +106,7 @@ class SendDiscordNotification
             ],
             'timestamp' => now()->toIso8601String(),
             'thumbnail' => [
-                    'url' => 'https://i.imgur.com/RuwKVmq.jpeg', // Agrega una URL de imagen pequeña
+                    'url' => 'https://i.imgur.com/RuwKVmq.jpeg', 
                 ],
             
         ];
