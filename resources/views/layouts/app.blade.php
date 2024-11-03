@@ -11,24 +11,14 @@
     <link href="{{ asset('plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
 </head>
-<style>
-    body {
-        background-color: #e2bf3283 !important;
-    }
-    [data-bs-theme="dark"] body {
-        background-color: #333;
-    }
-    .logo {
-        border-radius: 50% !important;
-        object-fit: cover;
-    }
-</style>
-
 <body class="font-sans antialiased">
-    <div class="min-h-screen bg-gray-100">
-        @include('layouts.header')
-        <div><br></div>
-        @yield('content')
-    </div>
+
+    @include('layouts.header')
+
+    <div><br></div>
+
+    @yield('content')
+
+    @livewireScripts
 </body>
 </html>
