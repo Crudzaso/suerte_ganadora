@@ -226,8 +226,35 @@
   
 }
 
+.header {
+  position: sticky; /* o sticky, según lo que prefieras */
+  top: 0; /* Asegúrate de que esté en la parte superior */
+  left: 0;
+  right: 0;
+  background-color: #ffffff;
+   /* Asegúrate de que esté por encima de otros elementos */
+}
 
+.menu-sub-dropdown{
+  position: absolute!important;
+  top: 79%;
+  left: 79%;
+  right: 0;
+  color: #212529;
+  background-color: #fff!important;
+  background-clip: padding-box;
+}
+ body {
+  background-color: #ffffff83 !important;
+}
+[data-bs-theme="dark"] body {
+  background-color: #333;
+}
 
+.logo {
+  border-radius: 50% !important;
+  object-fit: cover;
+}
 
 
 body {
