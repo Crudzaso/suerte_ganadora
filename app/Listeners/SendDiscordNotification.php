@@ -8,7 +8,6 @@ use App\Events\UserDeleted;
 use App\Events\UserRestore;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Auth\Events\Registered;
-use App\Providers\EventServiceProvider;
 use App\Services\DiscordNotifier;
 
 

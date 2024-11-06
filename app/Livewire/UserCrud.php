@@ -10,6 +10,7 @@ use App\Events\UserCreated;
 use App\Events\UserUpdated;
 use App\Events\UserDeleted;
 use App\Events\UserRestore;
+use OwenIt\Auditing\Models\Audit;
 
 
 class UserCrud extends Component
@@ -18,6 +19,10 @@ class UserCrud extends Component
 
     public $name, $email, $password, $user_id;
     public $isEditMode = false;
+    public $selectedUser;
+    public $audits;
+    public $showingDetails = false;
+    public $showingCreateForm = false;
 
     protected $rules = [
         'name' => 'required|string|max:255',
@@ -52,11 +57,17 @@ class UserCrud extends Component
 
     public function edit($id)
     {
-        $user = User::findOrFail($id);
-        $this->user_id = $user->id;
-        $this->name = $user->name;
-        $this->email = $user->email;
-        $this->isEditMode = true;
+        $this->isEditMode = true; 
+    $user = User::findOrFail($id);
+
+    
+    $this->user_id = $user->id;
+    $this->name = $user->name;
+    $this->email = $user->email;
+    $this->password = ''; 
+
+    // Abrir el modal de creación de usuario
+    $this->showingCreateForm = true;
     }
 
     public function update()
@@ -87,6 +98,65 @@ class UserCrud extends Component
     event(new UserDeleted($user)); 
 
     session()->flash('message', 'Usuario eliminado exitosamente.');
+}
+
+public function showDetails($userId)
+{
+    $this->selectedUser = User::find($userId);
+    
+    // Obtener la auditoría relacionada con este usuario
+    $this->audits = Audit::where('auditable_type', User::class)
+                         ->where('auditable_id', $userId)
+                         ->get();
+
+    // Parsear las auditorías
+    $this->audits->each(function ($audit) {
+        $audit->old_values = $this->parseAuditValues($audit->old_values);
+        $audit->new_values = $this->parseAuditValues($audit->new_values);
+    });
+
+    $this->showingDetails = true;
+}
+// Método para parsear valores de auditoría
+protected function parseAuditValues($values)
+{
+    
+    if (is_string($values)) {
+        $values = json_decode($values, true);  
+    }
+
+    if (is_array($values)) {
+        return collect($values)->map(function ($value, $key) {
+            if ($key == 'password') {
+                return '****'; 
+            }
+
+            if ($key == 'created_at') {
+                return \Carbon\Carbon::parse($value)->format('d-m-Y H:i:s');
+            }
+            return $value; 
+        });
+    }
+    return $values;
+}
+
+
+    // Metodos para abrir y cerrar los modales
+    public function closeDetails()
+    {
+        $this->showingDetails = false;
+    }
+
+    // Metodos para abrir y cerrar los modales
+    public function openCreateForm()
+{
+    $this->resetInputFields(); 
+    $this->showingCreateForm = true;
+}
+
+public function closeCreateForm()
+{
+    $this->showingCreateForm = false;
 }
 
     public function render()

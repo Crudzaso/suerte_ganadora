@@ -6,7 +6,7 @@ use App\Events\UserCreated;
 use App\Events\UserUpdated;
 use App\Events\UserDeleted;
 use App\Events\UserRestore;
-use App\Events\UserLogin;
+use Illuminate\Auth\Events\Login;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use App\Listeners\SendDiscordNotification;
