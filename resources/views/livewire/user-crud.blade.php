@@ -42,9 +42,6 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="createModalLabel">Crear Nuevo Usuario</h5>
-                        <button type="button" class="close" wire:click="closeCreateForm" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
                     </div>
                     <div class="modal-body">
                         <form wire:submit.prevent="{{ $isEditMode ? 'update' : 'store' }}">
