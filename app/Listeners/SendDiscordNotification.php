@@ -47,76 +47,76 @@ class SendDiscordNotification
 
     public function handleUserLogin(Login $event): void
     {
-        $actor = auth()->user() ?: $event->user; 
-        $this->sendNotification($event->user, 'ingreso', $actor);
+         $actor = auth()->user() ?: $event->user;
+         $authMethod = session('auth_method', 'Usuario'); 
+         $this->sendNotification($event->user, 'ingreso', $actor, $authMethod);
     }
 
     public function handleRegistered(Registered $event): void
     {
-    $this->sendNotification($event->user, 'registrado', $event->user); // O auth()->user() 
+    $this->sendNotification($event->user, 'registrado', $event->user ?: auth()->user()); 
     }
     
 
-    protected function sendNotification($user, $action, $actor)
-    {
-        
-        $colors = [
-            'creado' => '00ff00', 
-            'actualizado' => 'ffcc00', 
-            'eliminado' => 'ff0000', 
-            'restaurado' => 'ffff00', 
-            'ingreso' =>  '0000ff',
-            'registrado' => '00ffff', 
-        ];
-    
-        
-        $color = $colors[$action] ?? 'ffffff'; 
-    
-        $embed = [
-            'title' => "🎲  **Suerte ganadora**  🎲", 
-            'description' => "## **Usuario {$action}**", 
-            'color' => hexdec($color), 
-            'fields' => [
-                
-                [
-                    'name' => '🔑 **ID de usuario**',
-                    'value' => "{$user->id}",
-                    'inline' => true,
-                ],
-                [
-                    'name' => '👤 **Nombre de usuario**',
-                    'value' => "{$user->name}",
-                    'inline' => false,
-                ],
-                [
-                    'name' => '📧 **Correo Electrónico**',
-                    'value' => $user->email,
-                    'inline' => false,
-                ],
-                [
-                    'name' => '🛠️ **Realizado por**', 
-                    'value' => "**{$actor->name}** con el **ID: {$actor->id}** ",
-                    'inline' => false,
-                ],
+    protected function sendNotification($user, $action, $actor, $authMethod = 'Usuario')
+{
+    $colors = [
+        'creado' => '28a745', 
+        'actualizado' => 'ffc107',  
+        'eliminado' => 'dc3545',  
+        'restaurado' => '17a2b8', 
+        'ingreso' => '007bff',  
+        'registrado' => '17c671', 
+    ];
+
+    $color = $colors[$action] ?? 'ffffff';
+
+    $embed = [
+        'title' => "🎲  **Suerte ganadora**  🎲",
+        'description' => "## **Usuario {$action}**",
+        'color' => hexdec($color),
+        'fields' => [
+            [
+                'name' => '🔑 **ID de usuario**',
+                'value' => "`{$user->id}`",  // Envolviendo el valor en backticks
+                'inline' => true,
             ],
-            'footer' => [
-                'text' => implode(" | ", [
-                    'Notificación de suerte ganadora',
-                ]),
+            [
+                'name' => '👤 **Nombre de usuario**',
+                'value' => "`{$user->name}`",  // Envolviendo el valor en backticks
+                'inline' => true,
             ],
-            'timestamp' => now()->toIso8601String(),
-            'thumbnail' => [
-                    'url' => 'https://i.imgur.com/RuwKVmq.jpeg', 
-                ],
-            
-        ];
-    
-        try {
-            
-            $this->discordNotifier->sendEmbed($embed);
-        } catch (\Exception $e) {
-            \Log::error("Error al enviar notificación de Discord: " . $e->getMessage());
-        }
+            [
+                'name' => '🔒 **Método de Autenticación**',
+                'value' => "`{$authMethod}`",  
+                'inline' => false,
+            ],
+            [
+                'name' => '📧 **Correo Electrónico**',
+                'value' => "`{$user->email}`", 
+                'inline' => false,
+            ],
+            [
+                'name' => '🛠️ **Realizado por**',
+                'value' => "**`{$actor->name}`** con el **`ID: {$actor->id}`**",
+                'inline' => false,
+            ],
+        ],
+        'footer' => [
+            'text' => implode(" | ", [
+                'Notificación de suerte ganadora',
+            ]),
+        ],
+        'timestamp' => now()->toIso8601String(),
+        'thumbnail' => [
+            'url' => 'https://i.imgur.com/RuwKVmq.jpeg',
+        ],
+    ];
+
+    try {
+        $this->discordNotifier->sendEmbed($embed);
+    } catch (\Exception $e) {
+        \Log::error("Error al enviar notificación de Discord: " . $e->getMessage());
     }
-    
+}
 }
