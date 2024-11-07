@@ -10,18 +10,14 @@ use App\Events\UserCreated;
 use App\Events\UserUpdated;
 use App\Events\UserDeleted;
 use App\Events\UserRestore;
-<<<<<<< HEAD
 use OwenIt\Auditing\Models\Audit;
 use Spatie\Permission\Models\Role;
-=======
->>>>>>> origin/develop
 
 
 class UserCrud extends Component
 {
    use WithPagination;
 
-<<<<<<< HEAD
     public $roles; // Para almacenar los roles
     public $selectedRole; // Para almacenar el rol seleccionado
     public $name, $email, $password, $user_id;
@@ -30,10 +26,6 @@ class UserCrud extends Component
     public $audits;
     public $showingDetails = false;
     public $showingCreateForm = false;
-=======
-    public $name, $email, $password, $user_id;
-    public $isEditMode = false;
->>>>>>> origin/develop
 
     protected $rules = [
         'name' => 'required|string|max:255',
@@ -41,15 +33,12 @@ class UserCrud extends Component
         'password' => 'required|min:6',
     ];
 
-<<<<<<< HEAD
     public function mount()
     {
         // Cargar todos los roles disponibles
         $this->roles = Role::all();
     }
 
-=======
->>>>>>> origin/develop
     public function resetInputFields()
     {
         $this->name = '';
