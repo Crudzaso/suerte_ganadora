@@ -57,7 +57,6 @@ class SendDiscordNotification
     }
     
 
-
     protected function sendNotification($user, $action, $actor, $authMethod = 'Usuario')
 {
     $colors = [
@@ -125,5 +124,4 @@ class SendDiscordNotification
         \Log::error("Error al enviar notificación de Discord: " . $e->getMessage());
     }
 }
-
 }
