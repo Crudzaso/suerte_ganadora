@@ -11,12 +11,15 @@ use App\Events\UserUpdated;
 use App\Events\UserDeleted;
 use App\Events\UserRestore;
 use OwenIt\Auditing\Models\Audit;
+use Spatie\Permission\Models\Role;
 
 
 class UserCrud extends Component
 {
    use WithPagination;
 
+    public $roles; // Para almacenar los roles
+    public $selectedRole; // Para almacenar el rol seleccionado
     public $name, $email, $password, $user_id;
     public $isEditMode = false;
     public $selectedUser;
@@ -30,6 +33,12 @@ class UserCrud extends Component
         'password' => 'required|min:6',
     ];
 
+    public function mount()
+    {
+        // Cargar todos los roles disponibles
+        $this->roles = Role::all();
+    }
+
     public function resetInputFields()
     {
         $this->name = '';
@@ -42,15 +51,20 @@ class UserCrud extends Component
     public function store()
     {
         $this->validate();
-
+    
         $user = User::create([
             'name' => $this->name,
             'email' => $this->email,
             'password' => Hash::make($this->password),
         ]);
-
+    
+        // Asignar el rol seleccionado
+        if ($this->selectedRole) {
+            $user->assignRole($this->selectedRole);
+        }
+    
         event(new UserCreated($user)); // Disparar el evento
-
+    
         session()->flash('message', 'Usuario creado exitosamente.');
         $this->resetInputFields();
     }
@@ -83,6 +97,11 @@ class UserCrud extends Component
             'email' => $this->email,
             'password' => $this->password ? Hash::make($this->password) : $user->password,
         ]);
+    
+        // Asignar el rol seleccionado
+        if ($this->selectedRole) {
+            $user->syncRoles($this->selectedRole);  // syncRoles es mejor para actualizar el rol
+        }
     
         event(new UserUpdated($user)); // Disparar el evento
     

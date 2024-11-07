@@ -11,11 +11,13 @@ use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use OwenIt\Auditing\Auditable as AuditableTrait;
 use OwenIt\Auditing\Contracts\Auditable;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable  implements Auditable
 {
     use HasApiTokens;
     use AuditableTrait;
+    use Notifiable, HasRoles;
 
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory;

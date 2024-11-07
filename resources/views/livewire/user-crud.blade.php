@@ -36,46 +36,61 @@
     {{ $users->links() }} <!-- Paginación -->
 
     <!-- Modal para Crear Usuario -->
-    @if($showingCreateForm)
-        <div class="modal fade show" tabindex="-1" role="dialog" style="display: block;" aria-labelledby="createModalLabel" aria-hidden="false">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="createModalLabel">Crear Nuevo Usuario</h5>
+@if($showingCreateForm)
+<div class="modal fade show" tabindex="-1" role="dialog" style="display: block;" aria-labelledby="createModalLabel" aria-hidden="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createModalLabel">{{ $isEditMode ? 'Editar' : 'Crear' }} Usuario</h5>
+                <button type="button" class="close" wire:click="closeCreateForm" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form wire:submit.prevent="{{ $isEditMode ? 'update' : 'store' }}">
+                    <div class="form-group">
+                        <label>Nombre</label>
+                        <input type="text" class="form-control" wire:model="name">
+                        @error('name') <span class="text-danger">{{ $message }}</span> @enderror
                     </div>
-                    <div class="modal-body">
-                        <form wire:submit.prevent="{{ $isEditMode ? 'update' : 'store' }}">
-                            <div class="form-group">
-                                <label>Nombre</label>
-                                <input type="text" class="form-control" wire:model="name">
-                                @error('name') <span class="text-danger">{{ $message }}</span> @enderror
-                            </div>
 
-                            <div class="form-group">
-                                <label>Email</label>
-                                <input type="email" class="form-control" wire:model="email">
-                                @error('email') <span class="text-danger">{{ $message }}</span> @enderror
-                            </div>
-
-                            <div class="form-group">
-                                <label>Contraseña</label>
-                                <input type="password" class="form-control" wire:model="password">
-                                @error('password') <span class="text-danger">{{ $message }}</span> @enderror
-                            </div>
-
-                            <button type="submit" class="btn btn-primary">
-                                {{ $isEditMode ? 'Actualizar Usuario' : 'Crear Usuario' }}
-                            </button>
-                            <button type="button" class="btn btn-danger" wire:click="closeCreateForm">Cancelar</button>
-                        </form>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" class="form-control" wire:model="email">
+                        @error('email') <span class="text-danger">{{ $message }}</span> @enderror
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-warning" wire:click="closeCreateForm">Cerrar</button>
+
+                    <div class="form-group">
+                        <label>Contraseña</label>
+                        <input type="password" class="form-control" wire:model="password">
+                        @error('password') <span class="text-danger">{{ $message }}</span> @enderror
                     </div>
-                </div>
+
+                    <!-- Campo para asignar rol -->
+                    <div class="form-group">
+                        <label>Rol</label>
+                        <select class="form-control" wire:model="selectedRole">
+                            <option value="">Selecciona un rol</option>
+                            @foreach($roles as $role)
+                                <option value="{{ $role->name }}">{{ $role->name }}</option>
+                            @endforeach
+                        </select>
+                        @error('selectedRole') <span class="text-danger">{{ $message }}</span> @enderror
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        {{ $isEditMode ? 'Actualizar Usuario' : 'Crear Usuario' }}
+                    </button>
+                    <button type="button" class="btn btn-danger" wire:click="closeCreateForm">Cancelar</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" wire:click="closeCreateForm">Cerrar</button>
             </div>
         </div>
-    @endif
+    </div>
+</div>
+@endif
 
     <!-- Modal de Detalles del Usuario -->
     @if($showingDetails)
@@ -89,6 +104,7 @@
                     <div class="modal-body">
                         <p><strong>Nombre:</strong> {{ $selectedUser->name }}</p>
                         <p><strong>Email:</strong> {{ $selectedUser->email }}</p>
+                        <p><strong>Rol:</strong> {{ $selectedUser->getRoleNames()->implode(', ') }}</p>
                         <p><strong>Contraseña:</strong> *****</p>
 
                         <hr>

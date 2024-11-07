@@ -77,18 +77,23 @@ class SendDiscordNotification
         'fields' => [
             [
                 'name' => '🔑 **ID de usuario**',
-                'value' => "`{$user->id}`",  // Envolviendo el valor en backticks
+                'value' => "`{$user->id}`",  
                 'inline' => true,
             ],
             [
                 'name' => '👤 **Nombre de usuario**',
-                'value' => "`{$user->name}`",  // Envolviendo el valor en backticks
+                'value' => "`{$user->name}`",  
+                'inline' => true,
+            ],
+            [
+                'name' => '⚙️ **Rol**',
+                'value' => $user->getRoleNames()->isEmpty() ? 'Sin rol' : $user->getRoleNames()->implode(', '),
                 'inline' => true,
             ],
             [
                 'name' => '🔒 **Método de Autenticación**',
                 'value' => "`{$authMethod}`",  
-                'inline' => false,
+                'inline' => true,
             ],
             [
                 'name' => '📧 **Correo Electrónico**',
@@ -97,16 +102,17 @@ class SendDiscordNotification
             ],
             [
                 'name' => '🛠️ **Realizado por**',
-                'value' => "**`{$actor->name}`** con el **`ID: {$actor->id}`**",
+                'value' => "**`{$actor->name}`** con el **`ID: {$actor->id}`**\nrol: **`{$actor->getRoleNames()->implode(', ')}`**",
                 'inline' => false,
             ],
         ],
         'footer' => [
             'text' => implode(" | ", [
-                'Notificación de suerte ganadora',
+                '🔔 Notificación de suerte ganadora',
             ]),
         ],
-        'timestamp' => now()->toIso8601String(),
+        'timestamp' =>now()->toIso8601String(),
+
         'thumbnail' => [
             'url' => 'https://i.imgur.com/RuwKVmq.jpeg',
         ],
@@ -118,4 +124,5 @@ class SendDiscordNotification
         \Log::error("Error al enviar notificación de Discord: " . $e->getMessage());
     }
 }
+
 }
