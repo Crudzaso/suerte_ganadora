@@ -57,6 +57,7 @@ class SendDiscordNotification
     }
     
 
+
     protected function sendNotification($user, $action, $actor, $authMethod = 'Usuario')
 {
     $colors = [

@@ -5,11 +5,43 @@
         <div class="alert alert-success">{{ session('message') }}</div>
     @endif
 
+<<<<<<< HEAD
     <!-- Botón para abrir el modal de creación de usuario -->
     <button class="btn btn-success mb-3" wire:click="openCreateForm">Crear Nuevo Usuario</button>
 
     <!-- Lista de Usuarios -->
     <h3>Lista de Usuarios</h3>
+=======
+    <form wire:submit.prevent="{{ $isEditMode ? 'update' : 'store' }}">
+        <div class="form-group">
+            <label>Nombre</label>
+            <input type="text" class="form-control" wire:model="name">
+            @error('name') <span class="text-danger">{{ $message }}</span> @enderror
+        </div>
+
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" class="form-control" wire:model="email">
+            @error('email') <span class="text-danger">{{ $message }}</span> @enderror
+        </div>
+
+        <div class="form-group">
+            <label>Contraseña</label>
+            <input type="password" class="form-control" wire:model="password">
+            @error('password') <span class="text-danger">{{ $message }}</span> @enderror
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+            {{ $isEditMode ? 'Actualizar Usuario' : 'Crear Usuario' }}
+        </button>
+        <button type="button" class="btn btn-secondary" wire:click="resetInputFields">Cancelar</button>
+    </form>
+
+    <hr>
+
+    <h3>Lista de Usuarios</h3>
+
+>>>>>>> origin/develop
     <table class="table table-bordered">
         <thead>
             <tr>
