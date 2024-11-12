@@ -14,4 +14,25 @@ class Winner extends Model
         'user_id',
         'prize_id',
     ];
+
+    public function raffle()
+    {
+        return $this->belongsTo(Raffle::class);
+    }
+
+    public function ticket()
+    {
+        return $this->belongsTo(Ticket::class);
+    }   
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function prize()
+    {
+        return $this->belongsTo(Prize::class);
+    }
+    
 }
