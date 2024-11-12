@@ -14,4 +14,14 @@ class Prize extends Model
         "price",
         "raffle_id",
     ];
+
+    public function raffle()
+    {
+        return $this->belongsTo(Raffle::class);
+    }
+
+    public function winners(){
+        return $this->hasOne(Winner::class);
+    }
+
 }
