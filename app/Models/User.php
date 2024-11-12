@@ -69,4 +69,21 @@ class User extends Authenticatable  implements Auditable
             'password' => 'hashed',
         ];
     }
+
+    
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
+    }
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
+    public function winners()
+    {
+        return $this->hasMany(Winner::class);
+    }
+
 }
