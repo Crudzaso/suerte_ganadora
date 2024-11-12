@@ -13,4 +13,21 @@ class Ticket extends Model
         'user_id',
         'raffle_id',
     ];
+
+    public function raffle()
+    {
+        return $this->belongsTo(Raffle::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function winner()
+    {
+        return $this->hasOne(Winner::class);
+    }
+
+
 }
