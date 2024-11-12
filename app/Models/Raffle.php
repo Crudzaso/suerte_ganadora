@@ -15,4 +15,25 @@ class Raffle extends Model
         'end_date',
         'status'
     ];
+
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
+    }
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
+    public function prizes()
+    {
+        return $this->hasMany(Prize::class);
+    }
+
+    public function winners()   
+    {
+        return $this->hasMany(Winner::class);
+    }
+    
 }
