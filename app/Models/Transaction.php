@@ -16,4 +16,16 @@ class Transaction extends Model
         "transaction_date",
         'amount',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function raffle()
+    {
+        return $this->belongsTo(Raffle::class);
+    }
+
+    
 }
