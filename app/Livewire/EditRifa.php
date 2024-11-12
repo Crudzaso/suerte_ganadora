@@ -8,25 +8,11 @@ use Livewire\Component;
 class EditRifa extends Component
 {
 
-
-    public $rifaId;
-    public $title;
-    public $description;
-    public $start_date;
-    public $end_date;
-    public $status;
-
-    protected $rules = [
-        'title' => 'required|string|max:255',
-        'description' => 'nullable|string|max:1000',
-        'start_date' => 'required|date',
-        'end_date' => 'required|date|after_or_equal:start_date',
-        'status' => 'required|in:activo,inactivo',
-    ];
+    public $rifaId, $title, $description, $start_date, $end_date, $status;
 
     public function mount($rifaId)
     {
-        $rifa = Raffle::findOrFail($rifaId);
+        $rifa = Raffle::find($rifaId);
         $this->rifaId = $rifa->id;
         $this->title = $rifa->title;
         $this->description = $rifa->description;
@@ -35,11 +21,17 @@ class EditRifa extends Component
         $this->status = $rifa->status;
     }
 
-    public function updateRifa()
+    public function update()
     {
-        $this->validate();
+        $this->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date',
+            'status' => 'required|in:active,inactive',
+        ]);
 
-        $rifa = Raffle::findOrFail($this->rifaId);
+        $rifa = Raffle::find($this->rifaId);
         $rifa->update([
             'title' => $this->title,
             'description' => $this->description,
@@ -48,9 +40,10 @@ class EditRifa extends Component
             'status' => $this->status,
         ]);
 
-        session()->flash('message', 'Rifa actualizada exitosamente.');
-        return redirect()->route('rifa.index');
+        session()->flash('message', 'Rifa actualizada con éxito!');
+        return redirect()->to('/rifas');
     }
+
 
     public function render()
     {

@@ -8,21 +8,24 @@ use Livewire\Component;
 class ViewRifa extends Component
 
 {
+    public $rifas;
 
-    public $title;
-    public $description;
-    public $start_date;
-    public $end_date;
-    public $status;
-
-    public function mount($rifaId)
+    public function mount()
     {
-        $rifa = Raffle::findOrFail($rifaId);
-        $this->title = $rifa->title;
-        $this->description = $rifa->description;
-        $this->start_date = $rifa->start_date;
-        $this->end_date = $rifa->end_date;
-        $this->status = $rifa->status;
+        $this->rifas = Raffle::all();
+    }
+
+    public function deleteRifa($id)
+    {
+        Raffle::find($id)->delete();
+        session()->flash('message', 'Rifa eliminada con éxito.');
+        $this->rifas = Raffle::all(); // Refresca la lista
+    }
+
+
+    public function edit($id)
+    {
+        return redirect()->route('rifas.edit', ['rifa' => $id]);
     }
 
     public function render()

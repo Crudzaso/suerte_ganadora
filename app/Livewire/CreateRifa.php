@@ -9,19 +9,17 @@ class CreateRifa extends Component
 {
 
 
-    public $title, $description, $start_date, $end_date, $status;
+     public $title, $description, $start_date, $end_date, $status;
 
-    protected $rules = [
-        'title' => 'required|string|max:255',
-        'description' => 'nullable|string|max:1000',
-        'start_date' => 'required|date',
-        'end_date' => 'required|date|after_or_equal:start_date',
-        'status' => 'required|in:activo,inactivo',
-    ];
-
-    public function saveRifa()
+    public function create()
     {
-        $this->validate();
+        $this->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date',
+            'status' => 'required|in:active,inactive',
+        ]);
 
         Raffle::create([
             'title' => $this->title,
@@ -31,9 +29,10 @@ class CreateRifa extends Component
             'status' => $this->status,
         ]);
 
-        session()->flash('message', 'Rifa creada exitosamente.');
-        return redirect()->route('rifa.index');
+        session()->flash('message', 'Rifa creada con éxito!');
+        return redirect()->to('/rifas');
     }
+
 
 
    

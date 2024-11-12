@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\Auth\GoogleController;
+use App\Livewire\CreateRifa;
+use App\Livewire\EditRifa;
+use App\Livewire\ViewRifa;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -20,6 +23,10 @@ Route::middleware([
     Route::get('/usuarios', function () {
         return view('users.index');
     });
+
+    Route::get('/rifas', ViewRifa::class)->name('rifas.index');
+    Route::get('/rifas/create', CreateRifa::class)->name('rifas.create');
+    Route::get('/rifas/{rifa}/edit', EditRifa::class)->name('rifas.edit');
 
 });
 
