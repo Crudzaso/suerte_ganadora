@@ -65,8 +65,8 @@
                     @foreach($boletos as $boleto)
                     <tr class="hover:bg-gray-100">
                         <td class="px-6 py-4 text-lg text-gray-800">{{ $boleto->raffle->title }}</td>
-                        <td class="px-6 py-4 text-lg text-gray-800">{{ $boleto->number }}</td>
-                        <td class="px-6 py-4 text-lg text-gray-800">{{ $boleto->purchase_date }}</td>
+                        <td class="px-6 py-4 text-lg text-gray-800">{{ $boleto->ticket_number }}</td>
+                        <td class="px-6 py-4 text-lg text-gray-800">{{ $boleto->buy_date }}</td>
                     </tr>
                     @endforeach
                 </tbody>
