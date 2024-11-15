@@ -25,7 +25,8 @@
                         </div>
                         <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion me-0 me-lg-2">
                             <span class="menu-link">
-                                <a href="" class="menu-title">Rifas</a>
+                                <a href="{{ route('rifas.index') }}" class="menu-title">Rifas</a>
+
                                 <span class="menu-arrow d-lg-none"></span>
                             </span>
                         </div>
@@ -37,7 +38,7 @@
                         </div>
                         <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2">
                             <span class="menu-link">
-                                <a href="" class="menu-title">help</a>
+                                <a href="{{ route('help') }}" class="menu-title">help</a>
                                 <span class="menu-arrow d-lg-none"></span>
                             </span>
                         </div>
@@ -50,8 +51,8 @@
                     <div class="app-navbar-item" id="kt_header_user_menu_toggle">
                         <div class="cursor-pointer symbol symbol-35px symbol-lg-50px" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
                             @php
-                                $nameParts = explode(' ', auth()->user()->name);
-                                $initials = strtoupper($nameParts[0][0] . (isset($nameParts[1]) ? $nameParts[1][0] : ''));
+                            $nameParts = explode(' ', auth()->user()->name);
+                            $initials = strtoupper($nameParts[0][0] . (isset($nameParts[1]) ? $nameParts[1][0] : ''));
                             @endphp
                             <div class="bg-primary text-white d-flex justify-content-center align-items-center" style="border-radius: 50%; width: 50px; height: 50px;">
                                 {{ $initials }}
@@ -62,7 +63,7 @@
                                 <div class="menu-content d-flex align-items-center px-3">
                                     <div class="d-flex flex-column">
                                         <div class="fw-bold d-flex align-items-center fs-5">
-                                            {{ auth()->user()->name }} 
+                                            {{ auth()->user()->name }}
                                             <span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">Pro</span>
                                         </div>
                                     </div>
@@ -89,4 +90,3 @@
         </div>
     </div>
 </header>
-
