@@ -10,9 +10,9 @@ class EditRifa extends Component
 
     public $rifaId, $title, $description, $start_date, $end_date, $status;
 
-    public function mount($rifaId)
+    public function mount($rifa)
     {
-        $rifa = Raffle::find($rifaId);
+        $rifa = Raffle::find($rifa);
         $this->rifaId = $rifa->id;
         $this->title = $rifa->title;
         $this->description = $rifa->description;
@@ -47,6 +47,6 @@ class EditRifa extends Component
 
     public function render()
     {
-        return view('livewire.edit-rifa');
+        return view('livewire.edit-rifa')->layout('layouts.app');
     }
 }

@@ -4,24 +4,23 @@ namespace App\Livewire;
 
 use App\Models\Raffle;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class ViewRifa extends Component
-
 {
-    public $rifas;
 
-    public function mount()
-    {
-        $this->rifas = Raffle::all();
-    }
+    
+    use WithPagination;
+
+    public $listeners = ['confirmDelete' => 'deleteRifa'];
+
 
     public function deleteRifa($id)
     {
         Raffle::find($id)->delete();
         session()->flash('message', 'Rifa eliminada con éxito.');
-        $this->rifas = Raffle::all(); // Refresca la lista
+        $this->resetPage(); // Refresca la lista después de eliminar
     }
-
 
     public function edit($id)
     {
@@ -30,6 +29,8 @@ class ViewRifa extends Component
 
     public function render()
     {
-        return view('livewire.view-rifa');
+        ; // Pagina los resultados, 10 por página
+        return view('livewire.view-rifa', ['rifas' => Raffle::paginate(10)])->layout('layouts.app');
     }
+
 }

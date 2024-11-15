@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string("description")->nullable();
             $table->date("start_date");
             $table->date("end_date");
-            $table->enum('estado', ['activa', 'inactiva', 'finalizada']);
+            $table->enum('status', ['activa', 'inactiva', 'finalizada']);
             $table->timestamps();
         });
     }

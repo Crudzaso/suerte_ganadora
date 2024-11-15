@@ -38,6 +38,6 @@ class CreateRifa extends Component
    
     public function render()
     {
-        return view('livewire.create-rifa');
+        return view('livewire.create-rifa')->layout('layouts.app');
     }
 }
