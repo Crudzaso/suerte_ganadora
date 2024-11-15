@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Raffle extends Model
 {
     //
+
+    use HasFactory;
 
     protected $fillable = [
         'title',
@@ -15,6 +18,11 @@ class Raffle extends Model
         'end_date',
         'status'
     ];
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
 
     public function tickets()
     {
@@ -31,9 +39,8 @@ class Raffle extends Model
         return $this->hasMany(Prize::class);
     }
 
-    public function winners()   
+    public function winners()
     {
         return $this->hasMany(Winner::class);
     }
-    
 }

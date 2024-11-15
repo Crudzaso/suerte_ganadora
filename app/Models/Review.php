@@ -4,31 +4,29 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Testing\Fluent\Concerns\Has;
 
-class Ticket extends Model
+class Review extends Model
 {
     //
+
     use HasFactory;
+
     protected $fillable = [
-        'buy_date',
-        'ticket_number',
         'user_id',
         'raffle_id',
+        'comment',
+        'rating',
     ];
-
-    public function raffle()
-    {
-        return $this->belongsTo(Raffle::class);
-    }
-
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function winner()
+    /**
+     * Relationship with the Raffle that the review is for.
+     */
+    public function raffle()
     {
-        return $this->hasOne(Winner::class);
+        return $this->belongsTo(Raffle::class);
     }
 }
