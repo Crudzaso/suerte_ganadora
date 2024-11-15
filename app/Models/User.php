@@ -73,7 +73,7 @@ class User extends Authenticatable  implements Auditable
 
     public function reviews()
     {
-        return $this->hasMany(Reviews::class);
+        return $this->hasMany(Review::class);
     }
 
     public function tickets()

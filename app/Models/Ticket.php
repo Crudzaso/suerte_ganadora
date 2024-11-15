@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Testing\Fluent\Concerns\Has;
 
 class Ticket extends Model
 {
     //
+    use HasFactory;
     protected $fillable = [
         'buy_date',
         'ticket_number',
@@ -28,6 +31,4 @@ class Ticket extends Model
     {
         return $this->hasOne(Winner::class);
     }
-
-
 }
