@@ -20,7 +20,6 @@
 
     @include('layouts.header')
 
-    <br>
 
     <main>
         {{ $slot }}

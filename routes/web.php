@@ -3,8 +3,8 @@
 use App\Http\Controllers\Auth\GoogleController;
 use App\Livewire\CreateRifa;
 use App\Livewire\Dashboard;
-use App\Livewire\Datos;
 use App\Livewire\EditRifa;
+use App\Livewire\UserCrud;
 use App\Livewire\ViewRifa;
 use Illuminate\Support\Facades\Route;
 
@@ -20,9 +20,7 @@ Route::middleware([
 
     Route::get('/dashboard', Dashboard::class);
 
-    Route::get('/usuarios', function () {
-        return view('users.index');
-    });
+    Route::get('/usuarios', UserCrud::class)->name('users.index');
 
 
 

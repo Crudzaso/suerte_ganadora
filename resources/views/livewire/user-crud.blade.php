@@ -1,146 +1,88 @@
-<div>
-    <h2>Gestión de Usuarios</h2>
+<div class="min-h-screen flex flex-col items-center bg-[#ECF0F1] p-6 w-full">
+    <h2 class="text-3xl font-bold mb-6 text-gray-800">Gestión de Usuarios</h2>
 
+    <!-- Mensaje de éxito -->
     @if (session()->has('message'))
-        <div class="alert alert-success">{{ session('message') }}</div>
+    <div class="w-4/5 mb-4 p-4 bg-green-100 text-green-800 border border-green-200 rounded-lg">
+        {{ session('message') }}
+    </div>
     @endif
 
-    <!-- Botón para abrir el modal de creación de usuario -->
-    <button class="btn btn-success mb-3" wire:click="openCreateForm">Crear Nuevo Usuario</button>
+    <!-- Botón para crear un nuevo usuario -->
+    <button class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition mb-6" wire:click="openCreateForm">
+        Crear Nuevo Usuario
+    </button>
 
-    <!-- Lista de Usuarios -->
-    <h3>Lista de Usuarios</h3>
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Email</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($users as $user)
+    <!-- Tabla de Usuarios -->
+    <div class="w-4/5 bg-white rounded-lg overflow-x-auto">
+        <table class="w-full table-auto border-collapse">
+            <thead class="bg-[#95A5A6] text-white">
                 <tr>
-                    <td>{{ $user->name }}</td>
-                    <td>{{ $user->email }}</td>
-                    <td>
-                        <button wire:click="showDetails({{ $user->id }})" class="btn btn-primary btn-sm">Ver Detalles</button>
-                        <button wire:click="edit({{ $user->id }})" class="btn btn-info btn-sm">Editar</button>
-                        <button wire:click="delete({{ $user->id }})" class="btn btn-danger btn-sm">Eliminar</button>
+                    <th class="px-4 py-3 text-left">Nombre</th>
+                    <th class="px-4 py-3 text-left">Email</th>
+                    <th class="px-4 py-3 text-left">Rol</th>
+                    <th class="px-4 py-3 text-center">Acciones</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+                @foreach($users as $user)
+                <tr class="hover:bg-gray-50">
+                    <td class="px-4 py-3 text-gray-900">{{ $user->name }}</td>
+                    <td class="px-4 py-3 text-gray-700">{{ $user->email }}</td>
+                    <td class="px-4 py-3 text-gray-500">{{ $user->getRoleNames()->implode(', ') }}</td>
+                    <td class="px-4 py-3 flex justify-center space-x-2">
+                        <button wire:click="showDetails({{ $user->id }})" class="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition">Detalles</button>
+                        <button wire:click="edit({{ $user->id }})" class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 transition">Editar</button>
+                        <button wire:click="delete({{ $user->id }})" class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 transition">Eliminar</button>
                     </td>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 
-    {{ $users->links() }} <!-- Paginación -->
+    <!-- Paginación -->
+    <div class="mt-6">
+        {{ $users->links() }}
+    </div>
 
-    <!-- Modal para Crear Usuario -->
-@if($showingCreateForm)
-<div class="modal fade show" tabindex="-1" role="dialog" style="display: block;" aria-labelledby="createModalLabel" aria-hidden="false">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="createModalLabel">{{ $isEditMode ? 'Editar' : 'Crear' }} Usuario</h5>
-                <button type="button" class="close" wire:click="closeCreateForm" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form wire:submit.prevent="{{ $isEditMode ? 'update' : 'store' }}">
-                    <div class="form-group">
-                        <label>Nombre</label>
-                        <input type="text" class="form-control" wire:model="name">
-                        @error('name') <span class="text-danger">{{ $message }}</span> @enderror
-                    </div>
-
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" class="form-control" wire:model="email">
-                        @error('email') <span class="text-danger">{{ $message }}</span> @enderror
-                    </div>
-
-                    <div class="form-group">
-                        <label>Contraseña</label>
-                        <input type="password" class="form-control" wire:model="password">
-                        @error('password') <span class="text-danger">{{ $message }}</span> @enderror
-                    </div>
-
-                    <!-- Campo para asignar rol -->
-                    <div class="form-group">
-                        <label>Rol</label>
-                        <select class="form-control" wire:model="selectedRole">
-                            <option value="">Selecciona un rol</option>
-                            @foreach($roles as $role)
-                                <option value="{{ $role->name }}">{{ $role->name }}</option>
-                            @endforeach
-                        </select>
-                        @error('selectedRole') <span class="text-danger">{{ $message }}</span> @enderror
-                    </div>
-
-                    <button type="submit" class="btn btn-primary">
-                        {{ $isEditMode ? 'Actualizar Usuario' : 'Crear Usuario' }}
-                    </button>
-                    <button type="button" class="btn btn-danger" wire:click="closeCreateForm">Cancelar</button>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-warning" wire:click="closeCreateForm">Cerrar</button>
-            </div>
+    <!-- Modal para Crear o Editar Usuario -->
+    @if($showingCreateForm)
+    <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+        <div class="bg-white rounded-lg p-6 w-4/5 max-w-md shadow-lg">
+            <h5 class="text-xl font-semibold mb-4 text-gray-800">{{ $isEditMode ? 'Editar Usuario' : 'Crear Usuario' }}</h5>
+            <form wire:submit.prevent="{{ $isEditMode ? 'update' : 'store' }}">
+                <div class="mb-4">
+                    <label class="block text-gray-800 mb-1">Nombre</label>
+                    <input type="text" class="w-full p-2 rounded border-gray-300 focus:border-blue-500 focus:ring-blue-500" wire:model="name">
+                    @error('name') <span class="text-red-600">{{ $message }}</span> @enderror
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-800 mb-1">Email</label>
+                    <input type="email" class="w-full p-2 rounded border-gray-300 focus:border-blue-500 focus:ring-blue-500" wire:model="email">
+                    @error('email') <span class="text-red-600">{{ $message }}</span> @enderror
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-800 mb-1">Contraseña</label>
+                    <input type="password" class="w-full p-2 rounded border-gray-300 focus:border-blue-500 focus:ring-blue-500" wire:model="password">
+                    @error('password') <span class="text-red-600">{{ $message }}</span> @enderror
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-800 mb-1">Rol</label>
+                    <select class="w-full p-2 rounded border-gray-300 focus:border-blue-500 focus:ring-blue-500" wire:model="selectedRole">
+                        <option value="">Selecciona un rol</option>
+                        @foreach($roles as $role)
+                        <option value="{{ $role->name }}">{{ $role->name }}</option>
+                        @endforeach
+                    </select>
+                    @error('selectedRole') <span class="text-red-600">{{ $message }}</span> @enderror
+                </div>
+                <div class="flex justify-end space-x-4">
+                    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">Guardar</button>
+                    <button type="button" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition" wire:click="closeCreateForm">Cancelar</button>
+                </div>
+            </form>
         </div>
     </div>
-</div>
-@endif
-
-    <!-- Modal de Detalles del Usuario -->
-    @if($showingDetails)
-        <div class="modal fade show" tabindex="-1" role="dialog" style="display: block;" aria-labelledby="detailsModalLabel" aria-hidden="false">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="detailsModalLabel">Detalles del Usuario</h5>
-                        <button type="button" class="btn btn-danger" wire:click="closeDetails">Cerrar</button>
-                    </div>
-                    <div class="modal-body">
-                        <p><strong>Nombre:</strong> {{ $selectedUser->name }}</p>
-                        <p><strong>Email:</strong> {{ $selectedUser->email }}</p>
-                        <p><strong>Rol:</strong> {{ $selectedUser->getRoleNames()->implode(', ') }}</p>
-                        <p><strong>Contraseña:</strong> *****</p>
-
-                        <hr>
-
-                        <h5>Auditoría del Usuario</h5>
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Evento</th>
-                                    <th>Fecha</th>
-                                    <th>Antiguos Valores</th>
-                                    <th>Nuevos Valores</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($audits as $audit)
-                                    <tr>
-                                        <td>{{ $audit->event }}</td>
-                                        <td>{{ $audit->created_at }}</td>
-                                        <td>
-                                            @foreach($audit->old_values as $key => $value)
-                                                <p><strong>{{ $key }}:</strong> {{ $value }}</p>
-                                            @endforeach
-                                        </td>
-                                        <td>
-                                            @foreach($audit->new_values as $key => $value)
-                                                <p><strong>{{ $key }}:</strong> {{ $value }}</p>
-                                            @endforeach
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
     @endif
 </div>
