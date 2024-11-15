@@ -38,7 +38,7 @@
                         </div>
                         <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2">
                             <span class="menu-link">
-                                <a href="" class="menu-title">help</a>
+                                <a href="{{ route('help') }}" class="menu-title">help</a>
                                 <span class="menu-arrow d-lg-none"></span>
                             </span>
                         </div>
