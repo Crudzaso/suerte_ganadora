@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,8 +13,8 @@
 
     <link href="{{ asset('plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
-     @livewireStyles
-</head> 
+    @livewireStyles
+</head>
 
 <body class="font-sans antialiased">
 
@@ -22,7 +23,7 @@
     <br>
 
     <main>
-      {{ $slot }}   
+        {{ $slot }}
     </main>
 
 
@@ -31,4 +32,5 @@
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
 </body>
+
 </html>
