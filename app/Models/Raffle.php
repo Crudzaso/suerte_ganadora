@@ -19,6 +19,11 @@ class Raffle extends Model
         'status'
     ];
 
+    public function reviews()
+    {
+        return $this->hasMany(Reviews::class);
+    }
+
     public function tickets()
     {
         return $this->hasMany(Ticket::class);
@@ -34,9 +39,8 @@ class Raffle extends Model
         return $this->hasMany(Prize::class);
     }
 
-    public function winners()   
+    public function winners()
     {
         return $this->hasMany(Winner::class);
     }
-    
 }

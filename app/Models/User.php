@@ -70,7 +70,12 @@ class User extends Authenticatable  implements Auditable
         ];
     }
 
-    
+
+    public function reviews()
+    {
+        return $this->hasMany(Reviews::class);
+    }
+
     public function tickets()
     {
         return $this->hasMany(Ticket::class);
@@ -85,5 +90,4 @@ class User extends Authenticatable  implements Auditable
     {
         return $this->hasMany(Winner::class);
     }
-
 }
