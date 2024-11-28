@@ -9,7 +9,7 @@ class CreateRifa extends Component
 {
 
 
-     public $title, $description, $start_date, $end_date, $status;
+    public $title, $description, $start_date, $end_date, $status;
 
     public function create()
     {
@@ -35,7 +35,7 @@ class CreateRifa extends Component
 
 
 
-   
+
     public function render()
     {
         return view('livewire.create-rifa')->layout('layouts.app');

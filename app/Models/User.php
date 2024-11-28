@@ -25,6 +25,10 @@ class User extends Authenticatable  implements Auditable
     use Notifiable;
     use TwoFactorAuthenticatable;
 
+    /**Spatie roles and permissions */
+
+    use HasRoles;
+
     /**
      * The attributes that are mass assignable.
      *

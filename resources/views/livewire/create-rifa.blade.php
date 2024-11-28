@@ -45,8 +45,8 @@
             <label for="status" class="text-lg font-semibold text-gray-700 mb-1">Estado</label>
             <select id="status" wire:model="status"
                 class="w-full h-16 px-4 text-lg rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500">
-                <option value="active">Activa</option>
-                <option value="inactive">Inactiva</option>
+                <option value="active" name="active">Activa</option>
+                <option value="inactive" name="inactive">Inactiva</option>
             </select>
             @error('status') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
         </div>
