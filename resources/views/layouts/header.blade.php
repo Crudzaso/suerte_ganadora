@@ -42,6 +42,14 @@
                                 <span class="menu-arrow d-lg-none"></span>
                             </span>
                         </div>
+                        @if(auth()->user()->can('users.index'))
+                            <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2">
+                                <span class="menu-link">
+                                    <a href="{{ route('users.index') }}" class="menu-title">Users</a>
+                                    <span class="menu-arrow d-lg-none"></span>
+                                </span>
+                            </div>
+                        @endif
                     </div>
                 </div>
                 <div class="app-navbar flex-shrink-0">
