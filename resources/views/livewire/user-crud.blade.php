@@ -1,4 +1,6 @@
 @if(auth()->user()->can('users.index') && ('users.edit') && ('users.create') && ('users.delete'))
+
+    <!--Page shown to users not allowed to edit content-->    
     <div class="min-h-screen flex flex-col items-center bg-[#ECF0F1] p-6 w-full">
         <h2 class="text-3xl font-bold mb-6 text-gray-800">Gestión de Usuarios</h2>
 
@@ -87,16 +89,20 @@
         </div>
         @endif
     </div>
+
 @else
-<body class="d-flex justify-content-center align-items-center">
 
-    <div class="message-container text-center">
-        <h1>¡Ups, fuera de tu alcance!</h1>
-        <p>Solo unos pocos elegidos tienen acceso a esta página.</p>
-    </div>
+    <!--Page shown to users not allowed to edit content-->
+    <body class="d-flex justify-content-center align-items-center">
 
-    <!-- Vinculamos los archivos de JS de Bootstrap para el correcto funcionamiento de componentes si fuera necesario -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
-</body>
+        <div class="message-container text-center">
+            <h1>¡Ups, fuera de tu alcance!</h1>
+            <p>Solo unos pocos elegidos tienen acceso a esta página.</p>
+        </div>
+
+        <!-- Vinculamos los archivos de JS de Bootstrap para el correcto funcionamiento de componentes si fuera necesario -->
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    </body>
+    
 @endif
