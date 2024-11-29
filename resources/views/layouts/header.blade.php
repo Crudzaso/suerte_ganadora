@@ -11,7 +11,7 @@
             </div>
             <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0 me-lg-15">
                 <a href="{{ url('/dashboard') }}">
-                    <img alt="logo" src="{{ asset('media/logo.jpeg') }}" class="h-40px h-lg-100px" style="border-radius: 18%" />
+                    <img alt="logo" src="{{ asset('media/suerte_ganadora_logo_removebg.png') }}" class="h-40px h-lg-100px" style="border-radius: 18%" />
                 </a>
             </div>
             <div class="d-flex align-items-stretch justify-content-between flex-lg-grow-1" id="kt_app_header_wrapper">
