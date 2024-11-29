@@ -1,11 +1,13 @@
 <div class="container mx-auto px-4 py-6">
-    <!-- Botón para crear una nueva rifa -->
-    <div class="flex justify-end mb-6">
-        <a href="{{ route('rifas.create') }}" class="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition duration-300">
-            Crear nueva rifa
-        </a>
-    </div>
-
+    
+    @role('admin')
+        <!-- Botón para crear una nueva rifa -->
+        <div class="flex justify-end mb-6">
+            <a href="{{ route('rifas.create') }}" class="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition duration-300">
+                Crear nueva rifa
+            </a>
+        </div>
+    @endrole
     <!-- Listado de rifas en tarjetas -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         @foreach($rifas as $rifa)
@@ -15,18 +17,19 @@
             <p class="text-gray-600 mb-4">{{ $rifa->description }}</p>
             <p class="text-sm text-gray-500">Fecha de inicio: <span class="font-medium">{{ $rifa->start_date }}</span></p>
             <p class="text-sm text-gray-500">Fecha de fin: <span class="font-medium">{{ $rifa->end_date }}</span></p>
-
+            @role('admin')
             <!-- Botones de acción -->
-            <div class="flex justify-between mt-4">
-                <button wire:click="edit({{ $rifa->id }})"
-                    class="px-4 py-2 bg-yellow-500 text-white rounded-lg shadow hover:bg-yellow-600 transition duration-300">
-                    Editar
-                </button>
-                <button x-data @click="$dispatch('confirm-delete', {{ $rifa->id }})"
-                    class="px-4 py-2 bg-red-600 text-white rounded-lg shadow hover:bg-red-700 transition duration-300">
-                    Eliminar
-                </button>
-            </div>
+                <div class="flex justify-between mt-4">
+                    <button wire:click="edit({{ $rifa->id }})"
+                        class="px-4 py-2 bg-yellow-500 text-white rounded-lg shadow hover:bg-yellow-600 transition duration-300">
+                        Editar
+                    </button>
+                    <button x-data @click="$dispatch('confirm-delete', {{ $rifa->id }})"
+                        class="px-4 py-2 bg-red-600 text-white rounded-lg shadow hover:bg-red-700 transition duration-300">
+                        Eliminar
+                    </button>
+                </div>
+            @endrole
         </div>
         @endforeach
     </div>
@@ -36,7 +39,7 @@
         {{ $rifas->links() }}
     </div>
 
-    <!-- Modal de Confirmación -->
+    @role('admin')
     <!-- Modal de Confirmación -->
     <div x-data="{ open: false, rifaId: null }" @confirm-delete.window="open = true; rifaId = $event.detail">
         <div x-show="open" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
@@ -57,5 +60,6 @@
             </div>
         </div>
     </div>
+    @endrole
 
 </div>

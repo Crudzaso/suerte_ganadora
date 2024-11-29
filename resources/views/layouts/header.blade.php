@@ -11,7 +11,7 @@
             </div>
             <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0 me-lg-15">
                 <a href="{{ url('/dashboard') }}">
-                    <img alt="logo" src="{{ asset('media/logo.jpeg') }}" class="h-40px h-lg-100px" style="border-radius: 18%" />
+                    <img alt="logo" src="{{ asset('media/suerte_ganadora_logo_removebg.png') }}" class="h-40px h-lg-100px" style="border-radius: 18%" />
                 </a>
             </div>
             <div class="d-flex align-items-stretch justify-content-between flex-lg-grow-1" id="kt_app_header_wrapper">
@@ -42,6 +42,14 @@
                                 <span class="menu-arrow d-lg-none"></span>
                             </span>
                         </div>
+                        @if(auth()->user()->can('users.index'))
+                            <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2">
+                                <span class="menu-link">
+                                    <a href="{{ route('users.index') }}" class="menu-title">Users</a>
+                                    <span class="menu-arrow d-lg-none"></span>
+                                </span>
+                            </div>
+                        @endif
                     </div>
                 </div>
                 <div class="app-navbar flex-shrink-0">
