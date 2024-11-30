@@ -66,28 +66,6 @@
                                                 <!--begin:Menu item-->
                                                 <div class="menu-item p-0 m-0">
                                                     <!--begin:Menu link-->
-                                                    <a href="dashboards/projects.html" class="menu-link">
-                                                        <span class="menu-custom-icon d-flex flex-center flex-shrink-0 rounded w-40px h-40px me-3">
-                                                            <i class="ki-duotone ki-abstract-44 text-info fs-1">
-                                                                <span class="path1"></span>
-                                                                <span class="path2"></span>
-                                                            </i>
-                                                        </span>
-                                                        <span class="d-flex flex-column">
-                                                            <span class="fs-6 fw-bold text-gray-800">Projects</span>
-                                                            <span class="fs-7 fw-semibold text-muted">Tasts, graphs &amp; charts</span>
-                                                        </span>
-                                                    </a>
-                                                    <!--end:Menu link-->
-                                                </div>
-                                                <!--end:Menu item-->
-                                            </div>
-                                            <!--end:Col-->
-                                            <!--begin:Col-->
-                                            <div class="col-lg-6 mb-3">
-                                                <!--begin:Menu item-->
-                                                <div class="menu-item p-0 m-0">
-                                                    <!--begin:Menu link-->
                                                     <a href="{{ route('rifas.index') }}" class="menu-link">
                                                         <span class="menu-custom-icon d-flex flex-center flex-shrink-0 rounded w-40px h-40px me-3">
                                                             <i class="ki-duotone ki-cheque  text-success fs-1">
@@ -115,90 +93,17 @@
                                                 <!--begin:Menu item-->
                                                 <div class="menu-item p-0 m-0">
                                                     <!--begin:Menu link-->
-                                                    <a href="dashboards/marketing.html" class="menu-link">
+                                                    <a href="{{ route('help') }}" class="menu-link">
                                                         <span class="menu-custom-icon d-flex flex-center flex-shrink-0 rounded w-40px h-40px me-3">
-                                                            <i class="ki-duotone ki-chart-simple text-gray-900 fs-1">
+                                                            <i class="ki-duotone ki-question text-warning fs-1">
                                                                 <span class="path1"></span>
                                                                 <span class="path2"></span>
                                                                 <span class="path3"></span>
-                                                                <span class="path4"></span>
                                                             </i>
                                                         </span>
                                                         <span class="d-flex flex-column">
-                                                            <span class="fs-6 fw-bold text-gray-800">Marketing</span>
-                                                            <span class="fs-7 fw-semibold text-muted">Campaings &amp; conversions</span>
-                                                        </span>
-                                                    </a>
-                                                    <!--end:Menu link-->
-                                                </div>
-                                                <!--end:Menu item-->
-                                            </div>
-                                            <!--end:Col-->
-                                            <!--begin:Col-->
-                                            <div class="col-lg-6 mb-3">
-                                                <!--begin:Menu item-->
-                                                <div class="menu-item p-0 m-0">
-                                                    <!--begin:Menu link-->
-                                                    <a href="dashboards/bidding.html" class="menu-link">
-                                                        <span class="menu-custom-icon d-flex flex-center flex-shrink-0 rounded w-40px h-40px me-3">
-                                                            <i class="ki-duotone ki-switch text-warning fs-1">
-                                                                <span class="path1"></span>
-                                                                <span class="path2"></span>
-                                                            </i>
-                                                        </span>
-                                                        <span class="d-flex flex-column">
-                                                            <span class="fs-6 fw-bold text-gray-800">Bidding</span>
-                                                            <span class="fs-7 fw-semibold text-muted">Campaings &amp; conversions</span>
-                                                        </span>
-                                                    </a>
-                                                    <!--end:Menu link-->
-                                                </div>
-                                                <!--end:Menu item-->
-                                            </div>
-                                            <!--end:Col-->
-                                            <!--begin:Col-->
-                                            <div class="col-lg-6 mb-3">
-                                                <!--begin:Menu item-->
-                                                <div class="menu-item p-0 m-0">
-                                                    <!--begin:Menu link-->
-                                                    <a href="dashboards/pos.html" class="menu-link">
-                                                        <span class="menu-custom-icon d-flex flex-center flex-shrink-0 rounded w-40px h-40px me-3">
-                                                            <i class="ki-duotone ki-abstract-42 text-danger fs-1">
-                                                                <span class="path1"></span>
-                                                                <span class="path2"></span>
-                                                            </i>
-                                                        </span>
-                                                        <span class="d-flex flex-column">
-                                                            <span class="fs-6 fw-bold text-gray-800">POS System</span>
-                                                            <span class="fs-7 fw-semibold text-muted">Campaings &amp; conversions</span>
-                                                        </span>
-                                                    </a>
-                                                    <!--end:Menu link-->
-                                                </div>
-                                                <!--end:Menu item-->
-                                            </div>
-                                            <!--end:Col-->
-                                            <!--begin:Col-->
-                                            <div class="col-lg-6 mb-3">
-                                                <!--begin:Menu item-->
-                                                <div class="menu-item p-0 m-0">
-                                                    <!--begin:Menu link-->
-                                                    <a href="dashboards/call-center.html" class="menu-link">
-                                                        <span class="menu-custom-icon d-flex flex-center flex-shrink-0 rounded w-40px h-40px me-3">
-                                                            <i class="ki-duotone ki-call text-primary fs-1">
-                                                                <span class="path1"></span>
-                                                                <span class="path2"></span>
-                                                                <span class="path3"></span>
-                                                                <span class="path4"></span>
-                                                                <span class="path5"></span>
-                                                                <span class="path6"></span>
-                                                                <span class="path7"></span>
-                                                                <span class="path8"></span>
-                                                            </i>
-                                                        </span>
-                                                        <span class="d-flex flex-column">
-                                                            <span class="fs-6 fw-bold text-gray-800">Call Center</span>
-                                                            <span class="fs-7 fw-semibold text-muted">Campaings &amp; conversions</span>
+                                                            <span class="fs-6 fw-bold text-gray-800">Ayuda</span>
+                                                            <span class="fs-7 fw-semibold text-muted">Preguntas frecuentes e información general</span>
                                                         </span>
                                                     </a>
                                                     <!--end:Menu link-->
@@ -208,104 +113,6 @@
                                             <!--end:Col-->
                                         </div>
                                         <!--end:Row-->
-                                        <div class="separator separator-dashed mx-5 my-5"></div>
-                                        <!--begin:Landing-->
-                                        <div class="d-flex flex-stack flex-wrap flex-lg-nowrap gap-2 mx-5">
-                                            <div class="d-flex flex-column me-5">
-                                                <div class="fs-6 fw-bold text-gray-800">Landing Page Template</div>
-                                                <div class="fs-7 fw-semibold text-muted">Onpe page landing template with pricing &amp; others</div>
-                                            </div>
-                                            <a href="landing.html" class="btn btn-sm btn-primary fw-bold">Explore</a>
-                                        </div>
-                                        <!--end:Landing-->
-                                    </div>
-                                    <!--end:Col-->
-                                    <!--begin:Col-->
-                                    <div class="menu-more bg-light col-lg-4 py-3 px-3 py-lg-6 px-lg-6 rounded-end">
-                                        <!--begin:Heading-->
-                                        <h4 class="fs-6 fs-lg-4 text-gray-800 fw-bold mt-3 mb-3 ms-4">More Dashboards</h4>
-                                        <!--end:Heading-->
-                                        <!--begin:Menu item-->
-                                        <div class="menu-item p-0 m-0">
-                                            <!--begin:Menu link-->
-                                            <a href="dashboards/logistics.html" class="menu-link py-2">
-                                                <span class="menu-title">Logistics</span>
-                                            </a>
-                                            <!--end:Menu link-->
-                                        </div>
-                                        <!--end:Menu item-->
-                                        <!--begin:Menu item-->
-                                        <div class="menu-item p-0 m-0">
-                                            <!--begin:Menu link-->
-                                            <a href="dashboards/website-analytics.html" class="menu-link py-2">
-                                                <span class="menu-title">Website Analytics</span>
-                                            </a>
-                                            <!--end:Menu link-->
-                                        </div>
-                                        <!--end:Menu item-->
-                                        <!--begin:Menu item-->
-                                        <div class="menu-item p-0 m-0">
-                                            <!--begin:Menu link-->
-                                            <a href="dashboards/finance-performance.html" class="menu-link py-2">
-                                                <span class="menu-title">Finance Performance</span>
-                                            </a>
-                                            <!--end:Menu link-->
-                                        </div>
-                                        <!--end:Menu item-->
-                                        <!--begin:Menu item-->
-                                        <div class="menu-item p-0 m-0">
-                                            <!--begin:Menu link-->
-                                            <a href="dashboards/store-analytics.html" class="menu-link py-2">
-                                                <span class="menu-title">Store Analytics</span>
-                                            </a>
-                                            <!--end:Menu link-->
-                                        </div>
-                                        <!--end:Menu item-->
-                                        <!--begin:Menu item-->
-                                        <div class="menu-item p-0 m-0">
-                                            <!--begin:Menu link-->
-                                            <a href="dashboards/social.html" class="menu-link py-2">
-                                                <span class="menu-title">Social</span>
-                                            </a>
-                                            <!--end:Menu link-->
-                                        </div>
-                                        <!--end:Menu item-->
-                                        <!--begin:Menu item-->
-                                        <div class="menu-item p-0 m-0">
-                                            <!--begin:Menu link-->
-                                            <a href="dashboards/delivery.html" class="menu-link py-2">
-                                                <span class="menu-title">Delivery</span>
-                                            </a>
-                                            <!--end:Menu link-->
-                                        </div>
-                                        <!--end:Menu item-->
-                                        <!--begin:Menu item-->
-                                        <div class="menu-item p-0 m-0">
-                                            <!--begin:Menu link-->
-                                            <a href="dashboards/crypto.html" class="menu-link py-2">
-                                                <span class="menu-title">Crypto</span>
-                                            </a>
-                                            <!--end:Menu link-->
-                                        </div>
-                                        <!--end:Menu item-->
-                                        <!--begin:Menu item-->
-                                        <div class="menu-item p-0 m-0">
-                                            <!--begin:Menu link-->
-                                            <a href="dashboards/school.html" class="menu-link py-2">
-                                                <span class="menu-title">School</span>
-                                            </a>
-                                            <!--end:Menu link-->
-                                        </div>
-                                        <!--end:Menu item-->
-                                        <!--begin:Menu item-->
-                                        <div class="menu-item p-0 m-0">
-                                            <!--begin:Menu link-->
-                                            <a href="dashboards/podcast.html" class="menu-link py-2">
-                                                <span class="menu-title">Podcast</span>
-                                            </a>
-                                            <!--end:Menu link-->
-                                        </div>
-                                        <!--end:Menu item-->
                                     </div>
                                     <!--end:Col-->
                                 </div>
@@ -316,11 +123,89 @@
                         <!--end:Menu sub-->
                     </div>
                     <!--end:Menu item-->
+                    @if (auth()->user()->can('users.index'))
+                         <!--begin:Menu item-->
+                    <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" data-kt-app-menu-placement="bottom" class="menu-item here menu-here-bg menu-lg-down-accordion me-0 me-lg-2">
+                        <!--begin:Menu link-->
+                        <span class="menu-link">
+                            <span class="menu-title">Administración</span>
+                            <span class="menu-arrow d-lg-none"></span>
+                        </span>
+                        <!--end:Menu link-->
+                        <!--begin:Menu sub-->
+                        <div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown p-0 w-100 w-lg-850px" style="" kt-hidden-height="988">
+                            <!--begin:Dashboards menu-->
+                            <div class="menu-state-bg menu-extended overflow-hidden overflow-lg-visible" data-kt-menu-dismiss="true">
+                                <!--begin:Row-->
+                                <div class="row">
+                                    <!--begin:Col-->
+                                    <div class="col-lg-8 mb-3 mb-lg-0 py-3 px-3 py-lg-6 px-lg-6">
+                                        <!--begin:Row-->
+                                        <div class="row">
+                                            <!--begin:Col-->
+                                            <div class="col-lg-6 mb-3">
+                                                <!--begin:Menu item-->
+                                                <div class="menu-item p-0 m-0">
+                                                    <!--begin:Menu link-->
+                                                    <a href="{{ route('users.index') }}" class="menu-link">
+                                                        <span class="menu-custom-icon d-flex flex-center flex-shrink-0 rounded w-40px h-40px me-3">
+                                                            <i class="ki-duotone ki-profile-user text-info fs-1">
+                                                                <span class="path1"></span>
+                                                                <span class="path2"></span>
+                                                                <span class="path3"></span>
+                                                                <span class="path4"></span>
+                                                            </i>
+                                                        </span>
+                                                        <span class="d-flex flex-column">
+                                                            <span class="fs-6 fw-bold text-gray-800">Usuarios</span>
+                                                            <span class="fs-7 fw-semibold text-muted">Página dónde pordrás editar usuarios</span>
+                                                        </span>
+                                                    </a>
+                                                    <!--end:Menu link-->
+                                                </div>
+                                                <!--end:Menu item-->
+                                            </div>
+                                            <!--end:Col-->
+                                            <!--begin:Col-->
+                                            <div class="col-lg-6 mb-3">
+                                                <!--begin:Menu item-->
+                                                <div class="menu-item p-0 m-0">
+                                                    <!--begin:Menu link-->
+                                                    <a href="{{ route('rifas.index') }}" class="menu-link">
+                                                        <span class="menu-custom-icon d-flex flex-center flex-shrink-0 rounded w-40px h-40px me-3">
+                                                            <i class="ki-duotone ki-plus-circle  text-success fs-1">
+                                                                <span class="path1"></span>
+                                                                <span class="path2"></span>
+                                                            </i>
+                                                        </span>
+                                                        <span class="d-flex flex-column">
+                                                            <span class="fs-6 fw-bold text-gray-800">Crear Rifa</span>
+                                                            <span class="fs-7 fw-semibold text-muted">Página de creacion de rifas</span>
+                                                        </span>
+                                                    </a>
+                                                    <!--end:Menu link-->
+                                                </div>
+                                                <!--end:Menu item-->
+                                            </div>
+                                            <!--end:Col-->
+                                        </div>
+                                        <!--end:Row-->
+                                    </div>
+                                    <!--end:Col-->
+                                </div>
+                                <!--end:Row-->
+                            </div>
+                            <!--end:Dashboards menu-->
+                        </div>
+                        <!--end:Menu sub-->
+                    </div>
+                    <!--end:Menu item-->
+                    @endif
                 </div>
                 <!--end::Menu-->
             </div>
             <!--begin::Menu wrapper-->
-            
+
             <!--end::Menu wrapper-->
             <!--begin::Navbar-->
             <div class="app-navbar flex-shrink-0">
@@ -371,7 +256,7 @@
                         <!--begin::Menu item-->
                         <div class="menu-item px-5" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="left-start" data-kt-menu-offset="-15px, 0">
                             <a href="#" class="menu-link px-5">
-                                <span class="menu-title position-relative">Modo 
+                                <span class="menu-title position-relative">Modo
                                 <span class="ms-5 position-absolute translate-middle-y top-50 end-0">
                                     <i class="ki-duotone ki-night-day theme-light-show fs-2">
                                         <span class="path1"></span>
