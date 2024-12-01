@@ -20,12 +20,31 @@
 
 <body id="kt_app_body" data-kt-app-header-fixed-mobile="true" data-kt-app-toolbar-enabled="true" class="app-default">
 	<script>var defaultThemeMode = "light"; var themeMode; if ( document.documentElement ) { if ( document.documentElement.hasAttribute("data-bs-theme-mode")) { themeMode = document.documentElement.getAttribute("data-bs-theme-mode"); } else { if ( localStorage.getItem("data-bs-theme") !== null ) { themeMode = localStorage.getItem("data-bs-theme"); } else { themeMode = defaultThemeMode; } } if (themeMode === "system") { themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; } document.documentElement.setAttribute("data-bs-theme", themeMode); }</script>
-    <div class="d-flex flex-column flex-root app-root" id="kt_app_root">    
-        <div class="app-page flex-column flex-column-fluid" id="kt_app_page">
-            <x-header></x-header>
-            <main>
-                {{ $slot }}
-            </main>
+    <div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">
+        <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
+            <div class="d-flex flex-column flex-column-fluid">
+                <x-header></x-header>
+                        <!-- Header -->
+                <div id="kt_app_toolbar" class="app-toolbar w-100">
+                    <!--begin::Toolbar container-->
+                    <div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-column">
+                        <!--begin::Wrapper-->
+                        <div class="d-flex flex-stack my-10 my-lg-14">
+                            <!--begin::Page title-->
+                        <div class="page-title d-flex flex-column justify-content-center me-3">
+                                <!--begin::Title-->
+                                <h1 class="page-heading d-flex title-custom fw-bolder fs-2hx flex-column justify-content-center my-0">@yield('page-title')</h1>
+                                <!--end::Title-->
+                            </div>
+                        </div>
+                        <!--end::Wrapper-->
+                    </div>
+                    <!--end::Toolbar container-->
+                </div>
+                <div id="kt_app_content" class="app-content pt-10">
+                    {{ $slot }}
+                </div>
+            </div>
         </div>
     </div>
     <!--Start global scripts-->
@@ -35,7 +54,7 @@
     @livewireScripts
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0-alpha1/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    
+
 </body>
 
 </html>
