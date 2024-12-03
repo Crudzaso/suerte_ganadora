@@ -47,14 +47,14 @@
             </div>
         </div>
     </div>
+    
+    @livewireScripts
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0-alpha1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <!--Start global scripts-->
     <script src="{{ asset('assets/js/scripts.bundle.js') }}"></script>
 	<script src="{{ asset('plugins/global/plugins.bundle.js') }}"></script>
     <!--End global scripts-->
-    @livewireScripts
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0-alpha1/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-
 </body>
 
 </html>

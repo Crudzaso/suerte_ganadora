@@ -170,8 +170,9 @@
                                             <div class="col-lg-6 mb-3">
                                                 <!--begin:Menu item-->
                                                 <div class="menu-item p-0 m-0">
-                                                    <!--begin:Menu link-->
-                                                    <a href="{{ route('rifas.index') }}" class="menu-link">
+                                                    <!--begin:Menu <link-->
+                                                    </link-->
+                                                    <a href="{{ route('rifas.create') }}" class="menu-link">
                                                         <span class="menu-custom-icon d-flex flex-center flex-shrink-0 rounded w-40px h-40px me-3">
                                                             <i class="ki-duotone ki-plus-circle  text-success fs-1">
                                                                 <span class="path1"></span>
