@@ -10,12 +10,13 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     @vite(['resources/js/app.js', 'resources/js/menu.js'])
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    @livewireStyles
     <!--Start global styles-->
     <link href="{{ asset('plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
 	<link href="{{ asset('assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
     <!--End global styles-->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
-    @livewireStyles
 </head>
 
 <body id="kt_app_body" data-kt-app-header-fixed-mobile="true" data-kt-app-toolbar-enabled="true" class="app-default">
@@ -47,10 +48,11 @@
             </div>
         </div>
     </div>
-    
+
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     @livewireScripts
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0-alpha1/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <!--Start global scripts-->
     <script src="{{ asset('assets/js/scripts.bundle.js') }}"></script>
 	<script src="{{ asset('plugins/global/plugins.bundle.js') }}"></script>

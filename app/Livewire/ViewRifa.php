@@ -8,19 +8,22 @@ use Livewire\WithPagination;
 
 class ViewRifa extends Component
 {
-
-    
     use WithPagination;
 
-    public $listeners = ['confirmDelete' => 'deleteRifa'];
+    protected $listeners = ['deleteRifa' => 'deleteRifa'];
 
 
     public function deleteRifa($id)
-    {
-        Raffle::find($id)->delete();
-        session()->flash('message', 'Rifa eliminada con éxito.');
-        $this->resetPage(); // Refresca la lista después de eliminar
+{
+    \Log::info("Eliminando rifa con ID: $id"); // Log para depuración
+    $rifa = Rifa::find($id);
+    if ($rifa) {
+        $rifa->delete();
+        session()->flash('message', 'Rifa eliminada exitosamente.');
+    } else {
+        session()->flash('error', 'Rifa no encontrada.');
     }
+}
 
     public function edit($id)
     {

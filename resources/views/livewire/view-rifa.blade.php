@@ -1,5 +1,15 @@
 <div class="container mx-auto px-4 py-6">
-    
+    @if (session()->has('message'))
+    <div class="alert alert-success">
+        {{ session('message') }}
+    </div>
+@endif
+
+@if (session()->has('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
     @role('admin')
     <!-- Botón para crear una nueva rifa -->
     <div class="d-flex flex-wrap flex-stack mb-6">
@@ -46,8 +56,7 @@
                                     class="btn btn-primary">
                                     Editar
                                 </button>
-                                <button x-data @click="$dispatch('confirm-delete', {{ $rifa->id }})"
-                                    class="btn btn-danger">
+                                <button type="button" class="btn btn-danger" @click="$dispatch('confirm-delete', {{ $rifa->id }})" data-bs-toggle="modal" data-bs-target="#kt_modal_1">
                                     Eliminar
                                 </button>
                             </div>
@@ -63,27 +72,31 @@
         {{ $rifas->links() }}
     </div>
 
-    @role('admin')
-    <!-- Modal de Confirmación -->
-    <div x-data="{ open: false, rifaId: null }" @confirm-delete.window="open = true; rifaId = $event.detail">
-        <div x-show="open" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-            <div class="bg-white rounded-lg p-6 w-full max-w-md shadow-lg">
-                <h3 class="text-xl font-semibold text-gray-800 mb-4">¿Estás seguro de eliminar esta rifa?</h3>
-                <p class="text-gray-600 mb-6">Esta acción no se puede deshacer.</p>
-
-                <div class="flex justify-end space-x-4">
-                    <button @click="open = false"
-                        class="px-4 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400 transition">
-                        Cancelar
-                    </button>
-                    <button @click="$wire.deleteRifa(rifaId); open = false"
-                        class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition">
-                        Confirmar
-                    </button>
+@role('admin')
+<!-- Modal to delete raffle -->
+<div class="modal fade" tabindex="-1" id="kt_modal_1" x-data="{ open: false, rifaId: null }" @confirm-delete.window="console.log('Evento confirm-delete recibido con ID:', $event.detail); open = true; rifaId = $event.detail">>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Confirmar eliminación</h3>
+                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>
                 </div>
+            </div>
+
+            <div class="modal-body">
+                <p>¿Estás seguro de que deseas eliminar esta rifa? Esta acción no se puede deshacer.</p>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-danger"
+                x-on:click="if (rifaId) { $wire.deleteRifa(rifaId); open = false; }"
+                data-bs-dismiss="modal">Confirmar</button>
             </div>
         </div>
     </div>
-    @endrole
+</div>
+@endrole
 
 </div>
