@@ -12,6 +12,7 @@ class ViewRifa extends Component
 
     protected $listeners = ['deleteRifa' => 'deleteRifa'];
 
+    public $confirmingRaffleDeletion = false;
 
     public function deleteRifa($id)
 {
@@ -34,6 +35,19 @@ class ViewRifa extends Component
     {
         ; // Pagina los resultados, 10 por página
         return view('livewire.view-rifa', ['rifas' => Raffle::paginate(10)])->layout('layouts.app');
+    }
+
+    public function confirmingRaffleDeletion($id)
+    {
+        $this->confirmingRaffleDeletion = $id;
+    }
+
+    public function deleteRaffle(Raffle $rifa)
+    {
+        \Log::info("Eliminando rifa con ID: $rifa->id"); // Log para depuración
+        $rifa->delete();
+        $this->confirmingRaffleDeletion = false;
+        session()->flash('message', 'Rifa eliminada exitosamente.');
     }
 
 }

@@ -1,3 +1,6 @@
+@section('page-title')
+    Rifas
+@endsection
 <div class="container mx-auto px-4 py-6">
     @if (session()->has('message'))
     <div class="alert alert-success">
@@ -19,6 +22,7 @@
         <!--end::Actions-->
     </div>
     @endrole
+    
     <!-- Listado de rifas en tarjetas -->
     <div class="row g-6 g-xl-9">
         @foreach($rifas as $rifa)
@@ -59,6 +63,9 @@
                                 <button type="button" class="btn btn-danger" @click="$dispatch('confirm-delete', {{ $rifa->id }})" data-bs-toggle="modal" data-bs-target="#kt_modal_1">
                                     Eliminar
                                 </button>
+                                <x-danger-button wire:click="confirmRaffleDeletion ({{ $rifa->id }})" wire:loading.attr="disabled" class="btn btn-danger">
+                                    {{ __('Eliminar') }}
+                                </x-danger-button>
                             </div>
                         @endrole
                     </div>
@@ -74,7 +81,7 @@
 
 @role('admin')
 <!-- Modal to delete raffle -->
-<div class="modal fade" tabindex="-1" id="kt_modal_1" x-data="{ open: false, rifaId: null }" @confirm-delete.window="console.log('Evento confirm-delete recibido con ID:', $event.detail); open = true; rifaId = $event.detail">>
+<div class="modal fade" tabindex="-1" id="kt_modal_1" wire:model.live="confirmingRaffleDeletion">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -87,16 +94,37 @@
             <div class="modal-body">
                 <p>¿Estás seguro de que deseas eliminar esta rifa? Esta acción no se puede deshacer.</p>
             </div>
-
+            
             <div class="modal-footer">
-                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal" wire:click="$toggle('confirmingUserDeletion', false)" wire:loading.attr="disabled">Cerrar</button>
                 <button type="button" class="btn btn-danger"
-                x-on:click="if (rifaId) { $wire.deleteRifa(rifaId); open = false; }"
+                wire:click="deleteRaffle({{ $rifa->id }})" wire:loading.attr="disabled"
                 data-bs-dismiss="modal">Confirmar</button>
             </div>
         </div>
     </div>
 </div>
+
+<!--Jet-modal for interactivity-->
+<x-dialog-modal wire:model.live="confirmingRaffleDeletion">
+    <x-slot name="title">
+        {{ __('Confirmar eliminación') }}
+    </x-slot>
+
+    <x-slot name="content">
+        {{ __('¿Estás seguro de que deseas eliminar esta rifa? Esta acción no se puede deshacer.') }}
+    </x-slot>
+
+    <x-slot name="footer">
+        <x-secondary-button wire:click="$toggle('confirmingUserDeletion')" wire:loading.attr="disabled">
+            {{ __('Cancelar') }}
+        </x-secondary-button>
+
+        <x-danger-button class="ms-3" wire:click="deleteRaffle({{ $rifa->id }})" wire:loading.attr="disabled">
+            {{ __('Confirmar') }}
+        </x-danger-button>
+    </x-slot>
+</x-dialog-modal>
 @endrole
 
 </div>
