@@ -17,6 +17,7 @@ use Spatie\Permission\Models\Role;
 class UserCrud extends Component
 {
     use WithPagination;
+    protected $paginationTheme = 'bootstrap';
 
     public $roles; // Para almacenar los roles
     public $selectedRole; // Para almacenar el rol seleccionado
