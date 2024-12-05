@@ -1,35 +1,75 @@
+@section('page-title')
+    Rifas
+@endsection
 <div class="container mx-auto px-4 py-6">
-    
+    @if (session()->has('message'))
+    <div class="alert alert-success">
+        {{ session('message') }}
+    </div>
+@endif
+
+@if (session()->has('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
     @role('admin')
-        <!-- Botón para crear una nueva rifa -->
-        <div class="flex justify-end mb-6">
-            <a href="{{ route('rifas.create') }}" class="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition duration-300">
-                Crear nueva rifa
-            </a>
+    <!-- Botón para crear una nueva rifa -->
+    <div class="d-flex flex-wrap flex-stack mb-6">
+        <div class="d-flex flex-wrap my-2">
+            <a href="{{ route('rifas.create') }}" class="btn btn-primary btn-sm">Crear nueva rifa</a>
         </div>
+        <!--end::Actions-->
+    </div>
     @endrole
+    
     <!-- Listado de rifas en tarjetas -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="row g-6 g-xl-9">
         @foreach($rifas as $rifa)
-        <div wire:key="rifa-{{ $rifa->id }}"
-            class="bg-white rounded-lg shadow-lg p-6 hover:shadow-2xl hover:-translate-y-2 transition transform duration-300 ease-in-out">
-            <h5 class="text-2xl font-bold mb-2 text-gray-800">{{ $rifa->title }}</h5>
-            <p class="text-gray-600 mb-4">{{ $rifa->description }}</p>
-            <p class="text-sm text-gray-500">Fecha de inicio: <span class="font-medium">{{ $rifa->start_date }}</span></p>
-            <p class="text-sm text-gray-500">Fecha de fin: <span class="font-medium">{{ $rifa->end_date }}</span></p>
-            @role('admin')
-            <!-- Botones de acción -->
-                <div class="flex justify-between mt-4">
-                    <button wire:click="edit({{ $rifa->id }})"
-                        class="px-4 py-2 bg-yellow-500 text-white rounded-lg shadow hover:bg-yellow-600 transition duration-300">
-                        Editar
-                    </button>
-                    <button x-data @click="$dispatch('confirm-delete', {{ $rifa->id }})"
-                        class="px-4 py-2 bg-red-600 text-white rounded-lg shadow hover:bg-red-700 transition duration-300">
-                        Eliminar
-                    </button>
-                </div>
-            @endrole
+        <div wire:key="rifa-{{ $rifa->id }}" class="col-md-6 col-xl-4">
+                <!--Remember to place the HREF TO A DETAILED VIEW OF THE RAFFLE FOR THE CS TO BUY A TICKET-->
+                <a href="#" class="card border-hover-primary">
+                    <!--Remember to place the HREF TO A DETAILED VIEW OF THE RAFFLE FOR THE CS TO BUY A TICKET-->
+                    <div class="card-header border-0 pt-9">
+                        <div class="card-title m-0">
+                            <div class="symbol symbol-50px w-50px bg-light">
+                            <img src="{{ asset('assets/media/suerte_ganadora_logo-removebg-preview.png') }}" alt="Lotería">
+                            </div>
+                        </div>
+                        <div class="card-toolbar">
+                            <span class="badge badge-light-primary fw-bold me-auto px-4 py-3">Nombre de la lotería</span>
+                        </div>
+                    </div>
+                    <div class="card-body p-9">
+                        <div class="fs-3 fw-bold text-gray-900">{{ $rifa->title }}</div>
+                        <p class="text-gray-500 fw-semibold fs-5 mt-1 mb-7">{{ $rifa->description }}</p>
+                        <div class="d-flex flex-wrap mb-5">
+                            <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-7 mb-3">
+                                <div class="fs-6 text-gray-800 fw-bold">{{ $rifa->start_date }}</div>
+                                <div class="fw-semibold text-gray-500">Fecha de inicio:</div>
+                            </div>
+                            <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 mb-3">
+                                <div class="fs-6 text-gray-800 fw-bold">{{ $rifa->end_date }}</div>
+                                <div class="fw-semibold text-gray-500">Fecha de fin:</div>
+                            </div>
+                        </div>
+                        @role('admin')
+                        <!-- Botones de acción -->
+                            <div class="flex justify-between mt-4">
+                                <button wire:click="edit({{ $rifa->id }})"
+                                    class="btn btn-primary">
+                                    Editar
+                                </button>
+                                <button type="button" class="btn btn-danger" @click="$dispatch('confirm-delete', {{ $rifa->id }})" data-bs-toggle="modal" data-bs-target="#kt_modal_1">
+                                    Eliminar
+                                </button>
+                                <x-danger-button wire:click="confirmRaffleDeletion ({{ $rifa->id }})" wire:loading.attr="disabled" class="btn btn-danger">
+                                    {{ __('Eliminar') }}
+                                </x-danger-button>
+                            </div>
+                        @endrole
+                    </div>
+                </a>
         </div>
         @endforeach
     </div>
@@ -39,27 +79,52 @@
         {{ $rifas->links() }}
     </div>
 
-    @role('admin')
-    <!-- Modal de Confirmación -->
-    <div x-data="{ open: false, rifaId: null }" @confirm-delete.window="open = true; rifaId = $event.detail">
-        <div x-show="open" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-            <div class="bg-white rounded-lg p-6 w-full max-w-md shadow-lg">
-                <h3 class="text-xl font-semibold text-gray-800 mb-4">¿Estás seguro de eliminar esta rifa?</h3>
-                <p class="text-gray-600 mb-6">Esta acción no se puede deshacer.</p>
-
-                <div class="flex justify-end space-x-4">
-                    <button @click="open = false"
-                        class="px-4 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400 transition">
-                        Cancelar
-                    </button>
-                    <button @click="$wire.deleteRifa(rifaId); open = false"
-                        class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition">
-                        Confirmar
-                    </button>
+@role('admin')
+<!-- Modal to delete raffle -->
+<div class="modal fade" tabindex="-1" id="kt_modal_1" wire:model.live="confirmingRaffleDeletion">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Confirmar eliminación</h3>
+                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>
                 </div>
+            </div>
+
+            <div class="modal-body">
+                <p>¿Estás seguro de que deseas eliminar esta rifa? Esta acción no se puede deshacer.</p>
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal" wire:click="$toggle('confirmingUserDeletion', false)" wire:loading.attr="disabled">Cerrar</button>
+                <button type="button" class="btn btn-danger"
+                wire:click="deleteRaffle({{ $rifa->id }})" wire:loading.attr="disabled"
+                data-bs-dismiss="modal">Confirmar</button>
             </div>
         </div>
     </div>
-    @endrole
+</div>
+
+<!--Jet-modal for interactivity-->
+<x-dialog-modal wire:model.live="confirmingRaffleDeletion">
+    <x-slot name="title">
+        {{ __('Confirmar eliminación') }}
+    </x-slot>
+
+    <x-slot name="content">
+        {{ __('¿Estás seguro de que deseas eliminar esta rifa? Esta acción no se puede deshacer.') }}
+    </x-slot>
+
+    <x-slot name="footer">
+        <x-secondary-button wire:click="$toggle('confirmingUserDeletion')" wire:loading.attr="disabled">
+            {{ __('Cancelar') }}
+        </x-secondary-button>
+
+        <x-danger-button class="ms-3" wire:click="deleteRaffle({{ $rifa->id }})" wire:loading.attr="disabled">
+            {{ __('Confirmar') }}
+        </x-danger-button>
+    </x-slot>
+</x-dialog-modal>
+@endrole
 
 </div>

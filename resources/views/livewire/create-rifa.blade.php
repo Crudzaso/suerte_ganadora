@@ -1,62 +1,88 @@
-<!-- resources/views/livewire/create-rifa.blade.php -->
+@section('page-title')
+    Crear Rifa
+@endsection
+<div class="app-container container-xxl">
+    <div class="card mb-5 mb-xl-10">
+        <div class="collapse show">
+            <!-- Raffle Creation form -->
+            <form wire:submit.prevent="create" class="form fv-plugins-bootstrap5 fv-plugins-framework">
+                <div class="card-body border-top p-9">
+                    <!-- Title field -->
+                    <div class="row mb-6">
+                        <label for="title" class="col-lg-4 col-form-label required fw-semibold fs-6">Título</label>
+                        <div class="col-lg-8 fv-row fv-plugins-icon-container">
+                            <input type="text" id="title" wire:model="title"
+                                class= "form-control form-control-lg form-control-solid"
+                                placeholder="Ingresa el título">
+                            <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
+                                @error('title') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                    </div>
 
-<div class="flex flex-col justify-center items-center min-h-screen bg-gray-50">
-    <!-- Título de la vista -->
-    <h2 class="text-4xl font-bold mb-10 text-gray-800">Crear Rifa</h2>
+                    <!-- description field -->
+                    <div class="row mb-6">
+                        <label for="description" class="col-lg-4 col-form-label required fw-semibold fs-6">Descripción</label>
+                        <div class="col-lg-8 fv-row fv-plugins-icon-container">
+                            <textarea id="description" wire:model="description"
+                                class="form-control form-control-lg form-control-solid"
+                                placeholder="Ingresa la descripción">
+                            </textarea>
+                        </div>
+                        <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
+                            @error('description') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
+                        </div>
+                    </div>
 
-    <!-- Formulario de creación -->
-    <form wire:submit.prevent="create" class="w-full max-w-lg space-y-6 px-6">
-        <!-- Campo Título -->
-        <div class="flex flex-col">
-            <label for="title" class="text-lg font-semibold text-gray-700 mb-1">Título</label>
-            <input type="text" id="title" wire:model="title"
-                class="w-full h-16 px-4 text-lg rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
-                placeholder="Ingresa el título">
-            @error('title') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
+                    <!-- Campo Fecha de Inicio -->
+                    <div class="row mb-6">
+                        <label for="start_date" class="col-lg-4 col-form-label required fw-semibold fs-6">Fecha de Inicio</label>
+                        <div class="col-lg-8 fv-row fv-plugins-icon-container">
+                            <input type="date" id="start_date" wire:model="start_date"
+                                class="form-control form-control-lg form-control-solid">
+                        </div>
+                        <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
+                            @error('start_date') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
+                        </div>
+                    </div>
+
+                    <!-- Campo Fecha de Fin -->
+                    <div class="row mb-6">
+                        <label for="end_date" class="col-lg-4 col-form-label required fw-semibold fs-6">Fecha de Fin</label>
+                        <div class="col-lg-8 fv-row fv-plugins-icon-container">
+                            <input type="date" id="end_date" wire:model="end_date"
+                                class="form-control form-control-lg form-control-solid">
+                        </div>
+                        <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
+                            @error('end_date') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
+                        </div>
+                    </div>
+
+                    <!-- Campo Estado -->
+                    <div class="row mb-6">
+                        <label for="status" class="col-lg-4 col-form-label required fw-semibold fs-6">Estado</label>
+                        <div class="col-lg-8 fv-row fv-plugins-icon-container">
+                            <select id="status" wire:model="status"
+                                class="form-control form-control-lg form-control-solid" data-placeholder="Selecciona una opción" >
+                                <option value="null" selected>Selecciona una opción</option>
+                                <option value="active" name="active">Activa</option>
+                                <option value="inactive" name="inactive">Inactiva</option>
+                            </select>
+                        </div>
+                        <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
+                            @error('status') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
+                        </div>
+                    </div>
+
+                    <!-- Botón de Creación -->
+                    <div class="flex justify-center">
+                        <button class="btn btn-primary" type="submit"
+                            class="w-full h-16 bg-green-600 text-white text-lg font-semibold rounded-md shadow-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">
+                            Crear Rifa
+                        </button>
+                    </div>
+                </div>
+            </form>
         </div>
-
-        <!-- Campo Descripción -->
-        <div class="flex flex-col">
-            <label for="description" class="text-lg font-semibold text-gray-700 mb-1">Descripción</label>
-            <textarea id="description" wire:model="description"
-                class="w-full h-36 px-4 text-lg rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
-                placeholder="Ingresa la descripción"></textarea>
-            @error('description') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
-        </div>
-
-        <!-- Campo Fecha de Inicio -->
-        <div class="flex flex-col">
-            <label for="start_date" class="text-lg font-semibold text-gray-700 mb-1">Fecha de Inicio</label>
-            <input type="date" id="start_date" wire:model="start_date"
-                class="w-full h-16 px-4 text-lg rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500">
-            @error('start_date') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
-        </div>
-
-        <!-- Campo Fecha de Fin -->
-        <div class="flex flex-col">
-            <label for="end_date" class="text-lg font-semibold text-gray-700 mb-1">Fecha de Fin</label>
-            <input type="date" id="end_date" wire:model="end_date"
-                class="w-full h-16 px-4 text-lg rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500">
-            @error('end_date') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
-        </div>
-
-        <!-- Campo Estado -->
-        <div class="flex flex-col">
-            <label for="status" class="text-lg font-semibold text-gray-700 mb-1">Estado</label>
-            <select id="status" wire:model="status"
-                class="w-full h-16 px-4 text-lg rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500">
-                <option value="active" name="active">Activa</option>
-                <option value="inactive" name="inactive">Inactiva</option>
-            </select>
-            @error('status') <span class="text-sm text-red-600">{{ $message }}</span> @enderror
-        </div>
-
-        <!-- Botón de Creación -->
-        <div class="flex justify-center">
-            <button type="submit"
-                class="w-full h-16 bg-green-600 text-white text-lg font-semibold rounded-md shadow-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500">
-                Crear Rifa
-            </button>
-        </div>
-    </form>
+    </div>
 </div>

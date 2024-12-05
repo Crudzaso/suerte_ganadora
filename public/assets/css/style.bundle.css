@@ -49985,7 +49985,7 @@ body,
   }
 }
 .app-toolbar {
-  background-color: #F4DE6D;
+  background-color: #004225;
 }
 .app-toolbar .header-search.search-custom input {
   background-color: #FFF4BA !important;
@@ -50005,7 +50005,7 @@ body,
   background-color: #F1F1F4;
 }
 .app-toolbar .title-custom {
-  color: #071437;
+  color: #ffffff;
   font-weight: 700;
 }
 .app-toolbar .description-custom {
