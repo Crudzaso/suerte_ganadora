@@ -12,7 +12,7 @@ export default defineConfig({
                 'resources/css/style.bundle.css',
                 'resources/css/app.css',
                 'resources/js/app.js',
-                'resources/js/menu.js', 
+                'resources/js/menu.js',
                 ...customJsFiles,
                 'resources/js/scripts.bundle.js',
             ],
