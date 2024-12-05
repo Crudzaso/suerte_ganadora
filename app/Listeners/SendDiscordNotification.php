@@ -114,7 +114,7 @@ class SendDiscordNotification
         'timestamp' =>now()->toIso8601String(),
 
         'thumbnail' => [
-            'url' => 'https://res.cloudinary.com/djmqgrcci/image/upload/v1732832132/suerte_ganadora_logo_phrase_s2ikl1.jpg',
+            'url' => 'https://res.cloudinary.com/djmqgrcci/image/upload/v1733437748/suerte_ganadora_logo_complete_dfpfmr.png',
         ],
     ];
 
