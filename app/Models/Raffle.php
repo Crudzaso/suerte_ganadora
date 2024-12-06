@@ -17,7 +17,7 @@ class Raffle extends Model
         'start_date',
         'end_date',
         'status',
-        'lottery'
+        'lottery_name'
     ];
 
     public function reviews()
