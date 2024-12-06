@@ -78,13 +78,24 @@
                         <!-- Campo de Lotería -->
                         <div class="row mb-6">
                             <label for="status" class="col-lg-4 col-form-label required fw-semibold fs-6">Lotería</label>
+                            
                             <div class="col-lg-8 fv-row fv-plugins-icon-container">
-                                <select id="lottery" wire:model="lottery"
-                                    class="form-control form-control-lg form-control-solid" data-placeholder="Selecciona una opción" >
-                                    <option value="null" selected>Selecciona una opción</option>
-                                    <option value="active" name="active">Activa</option>
-                                    <option value="inactive" name="inactive">Inactiva</option>
-                                </select>
+                                @if ($getLotteries->isEmpty())
+                                    <div class="alert alert-warning">
+                                        No hay loterías disponibles en este momento.
+                                    </div>
+                                    <select class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" disabled>
+                                        <option>No disponible</option>
+                                    </select>
+                                @else
+                                    <select id="lottery" wire:model="lottery"
+                                        class="form-control form-control-lg form-control-solid" data-placeholder="Selecciona una opción" >
+                                        <option value="null" selected>Selecciona una Lotería</option>
+                                        @foreach ($getLotteries as $lottery )
+                                            <option value="{{ $lottery }}" name="{{ $lottery }}">Activa</option>    
+                                        @endforeach                                   
+                                    </select>
+                                @endif
                             </div>
                             <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
                                 @error('status') <span class="text-sm text-red-600">{{ $message }}</span> @enderror

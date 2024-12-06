@@ -6,6 +6,7 @@ use App\Models\Raffle;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Http;
+use GuzzleHttp\Client;
 
 class ViewRifa extends Component
 {
@@ -36,13 +37,21 @@ class ViewRifa extends Component
     
     public function getLotteries()
     {
+        $client = new Client();
+
         try{
-            $reponse = Http::retry(3,10);
-            
+            //Method to fetch lotteries from API
+            $response = $client->get('https://api-resultadosloterias.com/api/lotteries');
+            //Condition to see if http method get was sucessfull
+            if($response->getStatusCode()==200){
+                //Method to decode json response onto an array
+                $data = json_decode($response->getBody(), true);
+                return $data;
+            }
+            \Log::warning('API response not valid', $response->getBody());
             return [];
         }catch(\Exeption $e){
             \log::error('Error getting API information: ', $e->getMessage());
-            return [];
         }
     }
 
