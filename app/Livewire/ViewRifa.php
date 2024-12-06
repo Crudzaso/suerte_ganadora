@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Raffle;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Http;
 
 class ViewRifa extends Component
 {
@@ -31,6 +32,18 @@ class ViewRifa extends Component
     {
         ; // Pagina los resultados, 10 por página
         return view('livewire.view-rifa', ['rifas' => Raffle::paginate(10)])->layout('layouts.app');
+    }
+    
+    public function getLotteries()
+    {
+        try{
+            $reponse = Http::retry(3,10);
+            
+            return [];
+        }catch(\Exeption $e){
+            \log::error('Error getting API information: ', $e->getMessage());
+            return [];
+        }
     }
 
 }
