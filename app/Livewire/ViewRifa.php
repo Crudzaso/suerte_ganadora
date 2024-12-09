@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Raffle;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Http;
 
 class ViewRifa extends Component
 {
