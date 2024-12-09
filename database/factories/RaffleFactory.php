@@ -23,7 +23,7 @@ class RaffleFactory extends Factory
             'description' => $this->faker->sentence(),
             'start_date' => $this->faker->dateTime(),
             'end_date' => $this->faker->dateTime(),
-            "status" => $this->faker->randomElement(["activa", "inactiva", "finalizada"]),
+            "status" => $this->faker->randomElement(["active", "inactive", "finalized"]),
         ];
     }
 }

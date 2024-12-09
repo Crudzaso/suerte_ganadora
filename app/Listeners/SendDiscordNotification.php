@@ -14,7 +14,7 @@ use App\Services\DiscordNotifier;
 class SendDiscordNotification
 {
     protected $discordNotifier;
-    
+
     public function __construct(DiscordNotifier $discordNotifier)
     {
         $this->discordNotifier = $discordNotifier;
@@ -47,25 +47,25 @@ class SendDiscordNotification
     public function handleUserLogin(Login $event): void
     {
          $actor = auth()->user() ?: $event->user;
-         $authMethod = session('auth_method', 'Usuario'); 
+         $authMethod = session('auth_method', 'Usuario');
          $this->sendNotification($event->user, 'ingreso', $actor, $authMethod);
     }
 
     public function handleRegistered(Registered $event): void
     {
-    $this->sendNotification($event->user, 'registrado', $event->user ?: auth()->user()); 
+    $this->sendNotification($event->user, 'registrado', $event->user ?: auth()->user());
     }
-    
+
 
     protected function sendNotification($user, $action, $actor, $authMethod = 'Usuario')
 {
     $colors = [
-        'creado' => '28a745', 
-        'actualizado' => 'ffc107',  
-        'eliminado' => 'dc3545',  
-        'restaurado' => '17a2b8', 
-        'ingreso' => '007bff',  
-        'registrado' => '17c671', 
+        'creado' => '28a745',
+        'actualizado' => 'ffc107',
+        'eliminado' => 'dc3545',
+        'restaurado' => '17a2b8',
+        'ingreso' => '007bff',
+        'registrado' => '17c671',
     ];
 
     $color = $colors[$action] ?? 'ffffff';
@@ -77,12 +77,12 @@ class SendDiscordNotification
         'fields' => [
             [
                 'name' => '🔑 **ID de usuario**',
-                'value' => "`{$user->id}`",  
+                'value' => "`{$user->id}`",
                 'inline' => true,
             ],
             [
                 'name' => '👤 **Nombre de usuario**',
-                'value' => "`{$user->name}`",  
+                'value' => "`{$user->name}`",
                 'inline' => true,
             ],
             [
@@ -92,12 +92,12 @@ class SendDiscordNotification
             ],
             [
                 'name' => '🔒 **Método de Autenticación**',
-                'value' => "`{$authMethod}`",  
+                'value' => "`{$authMethod}`",
                 'inline' => true,
             ],
             [
                 'name' => '📧 **Correo Electrónico**',
-                'value' => "`{$user->email}`", 
+                'value' => "`{$user->email}`",
                 'inline' => false,
             ],
             [
@@ -114,7 +114,7 @@ class SendDiscordNotification
         'timestamp' =>now()->toIso8601String(),
 
         'thumbnail' => [
-            'url' => 'https://i.imgur.com/RuwKVmq.jpeg',
+            'url' => 'https://res.cloudinary.com/djmqgrcci/image/upload/v1733437748/suerte_ganadora_logo_complete_dfpfmr.png',
         ],
     ];
 
